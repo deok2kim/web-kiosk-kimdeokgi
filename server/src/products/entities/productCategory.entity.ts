@@ -3,14 +3,13 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinTable,
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
 
 @Entity({ name: 'product_category' })
-@Unique(['id'])
+@Unique(['name'])
 export class ProductCategory extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;

@@ -3,14 +3,11 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  Unique,
 } from 'typeorm';
 
 @Entity({ name: 'product' })
-@Unique(['id'])
 export class Product extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
