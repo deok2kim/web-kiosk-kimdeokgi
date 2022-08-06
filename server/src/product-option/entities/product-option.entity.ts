@@ -1,4 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { OrderDetail } from './../../order/entities/order-detail.entity';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  ManyToMany,
+  JoinTable,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ProductOptionCategory } from './product-option-category.entity';
 import { BaseEntity } from 'typeorm';
 @Entity({ name: 'product_option' })
@@ -21,4 +29,8 @@ export class ProductOption extends BaseEntity {
     },
   )
   category: number;
+
+  @ManyToMany(() => OrderDetail, (order) => order.id)
+  @JoinTable()
+  orders: OrderDetail[];
 }

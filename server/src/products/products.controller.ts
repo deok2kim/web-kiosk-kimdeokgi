@@ -11,7 +11,6 @@ export class ProductsController {
 
   @Post('/category')
   createCategory(@Body() productCategory: CreateProductCategoryDto) {
-    console.log('category', productCategory);
     return this.productsService.createCategory(productCategory);
   }
 
@@ -22,7 +21,6 @@ export class ProductsController {
 
   @Post()
   create(@Body() product: CreateProductDto) {
-    console.log('product', product);
     return this.productsService.create(product);
   }
 

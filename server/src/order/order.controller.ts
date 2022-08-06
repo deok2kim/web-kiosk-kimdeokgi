@@ -1,3 +1,4 @@
+import { CreateOrderDto } from './dto/create-order.dto';
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { createPaymentOptionDto } from './dto/create-payment-option.dto';
@@ -14,5 +15,10 @@ export class OrderController {
   @Post('/payment-option')
   createPaymentOption(@Body() option: createPaymentOptionDto) {
     return this.orderService.createPaymentOption(option);
+  }
+
+  @Post()
+  createOrder(@Body() order: CreateOrderDto) {
+    return this.orderService.createOrder(order);
   }
 }
