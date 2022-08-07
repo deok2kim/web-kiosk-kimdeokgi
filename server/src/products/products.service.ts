@@ -35,7 +35,7 @@ export class ProductsService {
   async findAllCategory(): Promise<ProductCategory[]> {
     return this.productCategoryRepository.find({
       relations: {
-        product: true,
+        products: true,
       },
     });
   }
