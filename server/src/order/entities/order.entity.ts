@@ -23,9 +23,6 @@ export class Order extends BaseEntity {
   })
   payment: number;
 
-  @OneToMany(() => OrderDetail, (order) => order.id, {
-    nullable: false,
-    onDelete: 'RESTRICT',
-  })
+  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.order)
   orders: OrderDetail[];
 }
