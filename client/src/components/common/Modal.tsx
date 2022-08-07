@@ -3,14 +3,21 @@ import styled from "styled-components";
 interface PropInterface {
   isOkBtn: boolean;
   isCancelBtn: boolean;
+  body: React.ReactNode;
+  header: string;
 }
 
-export default function Modal({ isOkBtn, isCancelBtn }: PropInterface) {
+export default function Modal({
+  isOkBtn,
+  isCancelBtn,
+  body,
+  header,
+}: PropInterface) {
   return (
     <ModalBackground>
       <ModalContainer>
-        <Header></Header>
-        <Body></Body>
+        <Header>{header}</Header>
+        <Body>{body}</Body>
         <Footer>
           {isCancelBtn && <CancelBtn>취소</CancelBtn>}
           {isOkBtn && <OkBtn>확인</OkBtn>}
@@ -36,7 +43,7 @@ const ModalBackground = styled.section`
 const ModalContainer = styled.div`
   width: 350px;
   height: 400px;
-  background-color: white;
+  background-color: ${(props) => props.theme.bgColor};
 
   display: flex;
   flex-direction: column;
@@ -53,6 +60,8 @@ const Header = styled.div`
 `;
 const Body = styled(Header)`
   height: 300px;
+  display: flex;
+  align-items: center;
 `;
 const Footer = styled(Header)`
   display: flex;
