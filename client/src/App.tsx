@@ -3,6 +3,7 @@ import MenuContainer from "./components/Body/MenuContainer";
 import styled from "styled-components";
 import CartContainer from "./components/Footer/CartContainer";
 import Adv from "./components/Header/\bAdv";
+import Modal from "./components/common/Modal";
 
 const Container = styled.article`
   width: 500px;
@@ -21,6 +22,7 @@ function App() {
       <Adv />
       <MenuContainer />
       <CartContainer />
+      <Modal isCancelBtn={true} isOkBtn={false} />
     </Container>
   );
 }
