@@ -6,6 +6,7 @@ import Adv from "./components/Header/\bAdv";
 import Modal from "./components/common/Modal";
 import ProductOptionList from "./components/ProductOptionList";
 import PaymentOption from "./components/PaymentOption";
+import PaymentCash from "./components/PaymentCash";
 
 const Container = styled.article`
   width: 500px;
@@ -27,7 +28,7 @@ function App() {
       <Modal
         isCancelBtn={true}
         isOkBtn={true}
-        body={<PaymentOption />}
+        body={<PaymentCash />}
         header={"결제 방법"}
       />
     </Container>
