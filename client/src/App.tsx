@@ -5,6 +5,7 @@ import CartContainer from "./components/Footer/CartContainer";
 import Adv from "./components/Header/\bAdv";
 import Modal from "./components/common/Modal";
 import ProductOptionList from "./components/ProductOptionList";
+import PaymentOption from "./components/PaymentOption";
 
 const Container = styled.article`
   width: 500px;
@@ -26,8 +27,8 @@ function App() {
       <Modal
         isCancelBtn={true}
         isOkBtn={true}
-        body={<ProductOptionList />}
-        header={"옵션 선택"}
+        body={<PaymentOption />}
+        header={"결제 방법"}
       />
     </Container>
   );
