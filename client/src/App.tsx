@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { GlobalStyle } from "./styles/globalStyle";
+import MenuContainer from "./components/Body/MenuContainer";
+import styled from "styled-components";
+import CartContainer from "./components/Footer/CartContainer";
+import Adv from "./components/Header/\bAdv";
+
+const Container = styled.article`
+  width: 500px;
+  height: 850px;
+
+  margin: 50px auto;
+  padding: 10px 20px;
+  background-color: black;
+  border-radius: 20px;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <GlobalStyle />
+      <Adv />
+      <MenuContainer />
+      <CartContainer />
+    </Container>
   );
 }
 
