@@ -33,10 +33,7 @@ export class OrderService {
 
   async findAllOrder(): Promise<Order[]> {
     return await this.orderRepository.find({
-      relations: {
-        payment: true,
-        orders: true,
-      },
+      relations: ['payment', 'orders'],
     });
   }
 
