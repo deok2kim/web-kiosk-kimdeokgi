@@ -1,14 +1,9 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { CategoryContext } from "../../contexts/category";
-
-interface CategoryInterface {
-  id: number;
-  name: string;
-}
-
+import { Category } from "../../types/types";
 interface PropsInterface {
-  category: CategoryInterface;
+  category: Category;
 }
 
 export default function CategoryItem({ category }: PropsInterface) {

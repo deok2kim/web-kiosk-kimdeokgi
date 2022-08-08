@@ -1,10 +1,14 @@
 import { createContext, useState } from "react";
+import { CategoryTitle } from "../types/types";
 
-const DEFAULT_CATEGORY = "커피";
+const DEFAULT_CATEGORY = "라떼";
 
 const CategoryContext = createContext({
   currentCategory: DEFAULT_CATEGORY,
-  changeCategory: (nextCategory: string, e: React.MouseEvent): void => {},
+  changeCategory: (
+    nextCategory: CategoryTitle,
+    e: React.MouseEvent
+  ): void => {},
 });
 
 interface CategoryProviderProps {
@@ -12,8 +16,12 @@ interface CategoryProviderProps {
 }
 
 const CategoryProvider = ({ children }: CategoryProviderProps): JSX.Element => {
-  const [currentCategory, setCurrentCategory] = useState(DEFAULT_CATEGORY);
-  const changeCategory = (nextCategory: string, e: React.MouseEvent): void => {
+  const [currentCategory, setCurrentCategory] =
+    useState<CategoryTitle>(DEFAULT_CATEGORY);
+  const changeCategory = (
+    nextCategory: CategoryTitle,
+    e: React.MouseEvent
+  ): void => {
     if (currentCategory === nextCategory) return;
     setCurrentCategory(nextCategory);
   };
