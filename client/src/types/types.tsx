@@ -4,7 +4,7 @@ export interface Category {
 }
 
 export interface Menu extends Category {
-  product: Product[];
+  products: Product[];
 }
 
 export interface Product {
