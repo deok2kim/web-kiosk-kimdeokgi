@@ -8,6 +8,7 @@ import ProductOptionList from "./components/ProductOptionList";
 import PaymentOption from "./components/PaymentOption";
 import PaymentCash from "./components/PaymentCash";
 import { CategoryProvider } from "./contexts/category";
+import { CartContextProvider } from "./contexts/CartContext";
 
 const Container = styled.article`
   width: 500px;
@@ -24,10 +25,12 @@ function App() {
     <Container>
       <GlobalStyle />
       <Adv />
-      <CategoryProvider>
-        <MenuContainer />
-      </CategoryProvider>
-      <CartContainer />
+      <CartContextProvider>
+        <CategoryProvider>
+          <MenuContainer />
+        </CategoryProvider>
+        <CartContainer />
+      </CartContextProvider>
     </Container>
   );
 }
