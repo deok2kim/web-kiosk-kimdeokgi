@@ -1,51 +1,9 @@
-import { useState } from "react";
 import styled from "styled-components";
 import CartItem from "./CartItem";
-
-interface CartInterface {
-  id: number;
-  name: string;
-  price: number;
-}
+import { useCartState } from "../../contexts/CartContext";
 
 export default function CartList() {
-  const [cartList] = useState<CartInterface[]>([
-    {
-      id: 1,
-      name: "초코라떼",
-      price: 5000,
-    },
-    {
-      id: 2,
-      name: "바닐라라떼",
-      price: 6000,
-    },
-    {
-      id: 3,
-      name: "아이스티",
-      price: 4000,
-    },
-    {
-      id: 3,
-      name: "아이스티",
-      price: 4000,
-    },
-    {
-      id: 3,
-      name: "아이스티",
-      price: 4000,
-    },
-    {
-      id: 3,
-      name: "아이스티",
-      price: 4000,
-    },
-    {
-      id: 3,
-      name: "아이스티",
-      price: 4000,
-    },
-  ]);
+  const cartList = useCartState();
   return (
     <CartListWrapper>
       {cartList.map((cartItem) => (

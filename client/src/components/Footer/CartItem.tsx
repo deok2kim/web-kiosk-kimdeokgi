@@ -1,17 +1,12 @@
 import styled from "styled-components";
+import { Cart } from "../../types";
 
-interface CartInterface {
-  id: number;
-  name: string;
-  price: number;
+interface CartItemProps {
+  cartItem: Cart;
 }
 
-interface PropsInterface {
-  cartItem: CartInterface;
-}
-
-export default function CartItem({ cartItem }: PropsInterface) {
-  return <CartItemWrapper>{cartItem.name}</CartItemWrapper>;
+export default function CartItem({ cartItem }: CartItemProps) {
+  return <CartItemWrapper></CartItemWrapper>;
 }
 
 const CartItemWrapper = styled.div`

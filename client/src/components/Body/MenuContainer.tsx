@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CategoryContext } from "../../contexts/category";
-import { Category, Product } from "../../types/types";
-import useMenuList from "../hooks/useMenuList";
+import { Category, Product } from "../../types";
+import useMenuList from "../../hooks/useMenuList";
 import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
 
