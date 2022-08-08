@@ -1,36 +1,11 @@
-import { useRef, useState } from "react";
 import styled from "styled-components";
+import { Category } from "../../types/types";
 import CategoryItem from "./CategoryItem";
-
-interface CategoryInterface {
-  id: number;
-  name: string;
+interface Props {
+  categories: Category[];
 }
 
-export default function CategoryList() {
-  const [categories] = useState<CategoryInterface[]>([
-    {
-      id: 1,
-      name: "커피",
-    },
-    {
-      id: 2,
-      name: "라뗴",
-    },
-    {
-      id: 3,
-      name: "쥬스",
-    },
-    {
-      id: 4,
-      name: "티",
-    },
-    {
-      id: 5,
-      name: "디카페인",
-    },
-  ]);
-
+export default function CategoryList({ categories }: Props) {
   return (
     <>
       <CategoriesWrapper>
