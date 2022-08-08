@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Product } from "../../types/types";
+import { Product } from "../../types";
 import ProductItem from "./ProductItem";
 
 interface ProductListProps {

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { CategoryContext } from "../../contexts/category";
-import { Category } from "../../types/types";
+import { Category } from "../../types";
 interface PropsInterface {
   category: Category;
 }

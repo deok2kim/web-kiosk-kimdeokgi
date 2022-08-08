@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { Menu } from "../../types/types";
+import { Menu } from "../types";
 
 interface Response {
   data: Menu[];

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Category } from "../../types/types";
+import { Category } from "../../types";
 import CategoryItem from "./CategoryItem";
 interface CategoryListProps {
   categories: Category[];

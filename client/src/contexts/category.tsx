@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { CategoryTitle } from "../types/types";
+import { CategoryTitle } from "../types";
 
 const DEFAULT_CATEGORY = "라떼";
 
