@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface PropInterface {
   isOkBtn: boolean;
@@ -55,15 +55,21 @@ const ModalContainer = styled.div`
   padding: 20px;
 `;
 
-const Header = styled.div`
+const fullWidth = css`
   width: 100%;
 `;
-const Body = styled(Header)`
+
+const Header = styled.div`
+  ${fullWidth}
+`;
+const Body = styled.div`
+  ${fullWidth}
   height: 300px;
   display: flex;
   align-items: center;
 `;
-const Footer = styled(Header)`
+const Footer = styled.div`
+  ${fullWidth}
   display: flex;
   align-items: center;
   justify-content: space-around;
