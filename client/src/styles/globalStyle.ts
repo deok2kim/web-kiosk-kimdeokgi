@@ -2,7 +2,12 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 export const GlobalStyle = createGlobalStyle`
-	@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+	@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 	${reset}
   html, body, div, span, applet, object, iframe,
 	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -34,7 +39,7 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	body {
 		line-height: 1;
-		font-family: 'Do Hyeon', sans-serif;
+		font-family: 'BMDOHYEON', sans-serif;
 		background-color: ${(props) => props.theme.bgColor};
 		color: ${(props) => props.theme.textColor}
 	}
