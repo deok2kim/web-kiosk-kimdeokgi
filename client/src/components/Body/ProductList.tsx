@@ -1,14 +1,16 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { Product } from "../../types/types";
 import ProductItem from "./ProductItem";
 
-export default function ProductList() {
-  const [productList] = useState<Product[]>([]);
+interface ProductListProps {
+  products: Product[] | undefined;
+}
+
+export default function ProductList({ products }: ProductListProps) {
   return (
     <>
       <ProductListWrapper>
-        {productList.map((product) => (
+        {products?.map((product) => (
           <li key={product.id}>
             <ProductItem product={product} />
           </li>
