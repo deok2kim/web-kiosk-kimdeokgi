@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Category } from "../../types/types";
 import CategoryItem from "./CategoryItem";
-interface Props {
+interface CategoryListProps {
   categories: Category[];
 }
 
-export default function CategoryList({ categories }: Props) {
+export default function CategoryList({ categories }: CategoryListProps) {
   return (
     <>
       <CategoriesWrapper>
