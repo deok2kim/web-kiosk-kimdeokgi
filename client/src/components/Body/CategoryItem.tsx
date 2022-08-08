@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { CategoryContext } from "../../contexts/category";
 
 interface CategoryInterface {
   id: number;
@@ -10,9 +12,12 @@ interface PropsInterface {
 }
 
 export default function CategoryItem({ category }: PropsInterface) {
+  const { changeCategory } = useContext(CategoryContext);
   return (
     <>
-      <CategoryWrapper>{category.name}</CategoryWrapper>
+      <CategoryWrapper onClick={(e) => changeCategory(category.name, e)}>
+        {category.name}
+      </CategoryWrapper>
     </>
   );
 }

@@ -7,6 +7,7 @@ import Modal from "./components/common/Modal";
 import ProductOptionList from "./components/ProductOptionList";
 import PaymentOption from "./components/PaymentOption";
 import PaymentCash from "./components/PaymentCash";
+import { CategoryProvider } from "./contexts/category";
 
 const Container = styled.article`
   width: 500px;
@@ -23,7 +24,9 @@ function App() {
     <Container>
       <GlobalStyle />
       <Adv />
-      <MenuContainer />
+      <CategoryProvider>
+        <MenuContainer />
+      </CategoryProvider>
       <CartContainer />
     </Container>
   );
