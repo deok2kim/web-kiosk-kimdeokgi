@@ -25,12 +25,6 @@ function App() {
       <Adv />
       <MenuContainer />
       <CartContainer />
-      <Modal
-        isCancelBtn
-        isOkBtn
-        body={<PaymentCash />}
-        header={"결제 방법"}
-      />
     </Container>
   );
 }
