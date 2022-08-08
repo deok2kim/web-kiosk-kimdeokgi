@@ -3,6 +3,10 @@ import MenuContainer from "./components/Body/MenuContainer";
 import styled from "styled-components";
 import CartContainer from "./components/Footer/CartContainer";
 import Adv from "./components/Header/\bAdv";
+import Modal from "./components/common/Modal";
+import ProductOptionList from "./components/ProductOptionList";
+import PaymentOption from "./components/PaymentOption";
+import PaymentCash from "./components/PaymentCash";
 
 const Container = styled.article`
   width: 500px;
@@ -21,6 +25,12 @@ function App() {
       <Adv />
       <MenuContainer />
       <CartContainer />
+      <Modal
+        isCancelBtn
+        isOkBtn
+        body={<PaymentCash />}
+        header={"결제 방법"}
+      />
     </Container>
   );
 }
