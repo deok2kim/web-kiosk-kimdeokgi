@@ -10,9 +10,7 @@ export default function MenuContainer() {
   if (error) return <div>Error...</div>;
 
   const getCategories = (): Category[] => {
-    return data.map(({ id, name }): Category => {
-      return { id, name };
-    });
+    return data.map(({ id, name }): Category => ({ id, name }));
   };
 
   return (
