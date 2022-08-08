@@ -26,8 +26,8 @@ function App() {
       <MenuContainer />
       <CartContainer />
       <Modal
-        isCancelBtn={true}
-        isOkBtn={true}
+        isCancelBtn
+        isOkBtn
         body={<PaymentCash />}
         header={"결제 방법"}
       />
