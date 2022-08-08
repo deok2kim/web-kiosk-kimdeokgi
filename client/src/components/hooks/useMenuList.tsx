@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { CategoryAll } from "../../types/types";
+import { Menu } from "../../types/types";
 
 interface Response {
-  data: CategoryAll[];
+  data: Menu[];
   loading: boolean;
   error?: Error;
 }
@@ -11,7 +11,7 @@ interface Response {
 const BASE_URL = process.env.REACT_APP_API_ROOT;
 
 const useMenuList = (): Response => {
-  const [data, setData] = useState<CategoryAll[]>([]);
+  const [data, setData] = useState<Menu[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
 

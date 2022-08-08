@@ -1,7 +1,7 @@
 import { Category } from "../../types/types";
 import useMenuList from "../hooks/useMenuList";
 import CategoryList from "./CategoryList";
-import MenuList from "./MenuList";
+import ProductList from "./ProductList";
 
 export default function MenuContainer() {
   const { data, loading, error } = useMenuList();
@@ -16,7 +16,7 @@ export default function MenuContainer() {
   return (
     <>
       <CategoryList categories={getCategories()} />
-      <MenuList />
+      <ProductList />
     </>
   );
 }
