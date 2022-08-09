@@ -35,7 +35,7 @@ export default function ProductItem({ product }: ProductProps) {
     setIsOpenModal(!isOpenModal);
   };
 
-  const handleOKClick = () => {};
+  const MODAL_TITLE = "옵션 선택";
   return (
     <>
       {isOpenModal && (
@@ -45,7 +45,7 @@ export default function ProductItem({ product }: ProductProps) {
           cancelBtnFunc={onModalToggle}
           okBtnFunc={handleSubmit}
           body={<ProductOptionList />}
-          header={"옵션 선택"}
+          header={MODAL_TITLE}
         />
       )}
       <ProductWrapper onClick={onModalToggle}>{product.name}</ProductWrapper>
