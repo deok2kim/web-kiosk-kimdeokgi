@@ -5,7 +5,10 @@ type CartState = Cart[];
 
 const CartStateContext = createContext<CartState | undefined>(undefined);
 
-type Action = { type: "CREATE"; item: Cart } | { type: "REMOVE"; id: number };
+type Action =
+  | { type: "CREATE"; item: Cart }
+  | { type: "REMOVE"; id: number }
+  | { type: "INIT" };
 
 type CartDispatch = Dispatch<Action>;
 const CartDispatchContext = createContext<CartDispatch | undefined>(undefined);
@@ -23,6 +26,8 @@ function cartReducer(state: CartState, action: Action): CartState {
         });
     case "REMOVE":
       return state.filter((cart) => cart.id !== action.id);
+    case "INIT":
+      return [];
     default:
       throw new Error(`Unhandled Action`);
   }
