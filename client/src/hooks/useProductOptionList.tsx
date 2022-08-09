@@ -23,10 +23,9 @@ const useProductOptionList = (): Response => {
           `${BASE_URL}/product-option/category`
         );
         setData(response.data);
-        setLoading(false);
       } catch (e) {
-        const err = e as AxiosError;
-        setError(err);
+        if (axios.isAxiosError(e)) setError(e);
+      } finally {
         setLoading(false);
       }
     };
