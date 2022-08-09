@@ -9,10 +9,16 @@ export default function Payment() {
       type: "INIT",
     });
   };
+
+  const isCartEmpty = () => {
+    return !cartList.length;
+  };
   return (
     <PaymentWrapper>
-      <Button color="teal">결제</Button>
-      <Button color="tomato" onClick={onCartClear} disabled={!cartList.length}>
+      <Button color="teal" disabled={isCartEmpty()}>
+        결제
+      </Button>
+      <Button color="tomato" onClick={onCartClear} disabled={isCartEmpty()}>
         장바구니 삭제
       </Button>
     </PaymentWrapper>
