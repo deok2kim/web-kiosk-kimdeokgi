@@ -21,11 +21,12 @@ export default function ProductItem({ product }: ProductProps) {
   };
 
   const handleSubmit = () => {
+    const { temperature, size, quantity } = optionForm;
     const selectedItem = {
-      option: { temperature: optionForm.temperature, size: optionForm.size },
+      option: { temperature, size },
       id: 0,
       product,
-      quantity: optionForm.quantity,
+      quantity,
     };
     dispatch({
       type: "CREATE",
