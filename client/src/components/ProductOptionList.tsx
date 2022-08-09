@@ -15,7 +15,6 @@ export default function ProductOptionList() {
     MIN = 1;
 
   const onIncrease = () => {
-    console.log(extraCharge);
     if (quantity + 1 > MAX) return;
     changeProductOption("quantity", quantity + 1, extraCharge);
   };

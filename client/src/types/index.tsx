@@ -45,3 +45,22 @@ export interface PaymentOption {
   id: number;
   name: string;
 }
+
+export interface Order {
+  payment: number;
+  totalAmount: string;
+  products: OrderProduct[];
+}
+
+export interface OrderProduct {
+  id: number;
+  quantity: number;
+}
+
+export interface OrderResponse {
+  id: number;
+  payment: number;
+  totalAmount: string;
+  created_at: string;
+  products: OrderProduct[];
+}
