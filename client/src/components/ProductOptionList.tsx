@@ -1,70 +1,49 @@
-import { useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import ProductOptionitem from "./ProductOptionItem";
-
-interface ProductOptionInterface {
-  id: number;
-  name: string;
-  productOption: OptionItemInterface[];
-}
-
-interface OptionItemInterface {
-  id: number;
-  name: string;
-  extra_charge: string;
-}
+import { ProductContext } from "../contexts/ProductContext";
+import useProductOptionList from "../hooks/useProductOptionList";
+import ProductOptionItem from "./ProductOptionItem";
 
 export default function ProductOptionList() {
-  const [options] = useState<ProductOptionInterface[]>([
-    {
-      id: 2,
-      name: "물온도",
-      productOption: [
-        {
-          id: 7,
-          name: "아이스",
-          extra_charge: "0",
-        },
-        {
-          id: 6,
-          name: "핫",
-          extra_charge: "0",
-        },
-      ],
-    },
-    {
-      id: 1,
-      name: "사이즈",
-      productOption: [
-        {
-          id: 10,
-          name: "스몰",
-          extra_charge: "0",
-        },
-        {
-          id: 9,
-          name: "미디움",
-          extra_charge: "500",
-        },
-        {
-          id: 8,
-          name: "라지",
-          extra_charge: "1000",
-        },
-      ],
-    },
-  ]);
+  const { data: options, loading, error } = useProductOptionList();
+  const { optionForm, changeProductOption } = useContext(ProductContext);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error...</div>;
+
+  const MAX = 99;
+  const MIN = 1;
+
+  const onIncrease = () => {
+    if (optionForm.quantity + 1 > MAX) return;
+    changeProductOption("quantity", optionForm.quantity + 1);
+  };
+
+  const onDecrease = () => {
+    if (optionForm.quantity - 1 < MIN) return;
+    changeProductOption("quantity", optionForm.quantity - 1);
+  };
+
+  const handleProductOptionClick = (optionCategory: string, option: string) => {
+    changeProductOption(optionCategory, option);
+  };
+
   return (
     <ProductOptionContainer>
       {options.map((option) => (
         <li key={option.id}>
-          <ProductOptionitem options={option.productOption} />
+          <ProductOptionItem
+            options={option.productOptions}
+            optionCategoryName={option.name}
+            onProductOptionClick={handleProductOptionClick}
+          />
         </li>
       ))}
       <ProductCount>
-        <p>➖</p>
-        <input type={"number"} />
-        <p>➕</p>
+        <button onClick={onDecrease}>-</button>
+        {/* TODO: 두자리 숫자로 맞추기 */}
+        <p>{optionForm.quantity}</p>
+        <button onClick={onIncrease}>+</button>
       </ProductCount>
     </ProductOptionContainer>
   );
@@ -78,6 +57,6 @@ const ProductOptionContainer = styled.ul`
 
 const ProductCount = styled.li`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 `;

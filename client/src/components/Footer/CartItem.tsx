@@ -1,25 +1,37 @@
 import styled from "styled-components";
+import { Cart } from "../../types";
 
-interface CartInterface {
-  id: number;
-  name: string;
-  price: number;
+interface CartItemProps {
+  cartItem: Cart;
 }
 
-interface PropsInterface {
-  cartItem: CartInterface;
-}
-
-export default function CartItem({ cartItem }: PropsInterface) {
-  return <CartItemWrapper>{cartItem.name}</CartItemWrapper>;
+export default function CartItem({ cartItem }: CartItemProps) {
+  const {
+    product: { name, price, thumbnail_img },
+    option: { size, temperature },
+    quantity,
+  } = cartItem;
+  return (
+    <>
+      <CartItemWrapper>
+        <p>{name}</p>
+        <p>
+          {size} | {temperature}
+        </p>
+      </CartItemWrapper>
+    </>
+  );
 }
 
 const CartItemWrapper = styled.div`
-  width: 75px;
-  height: 75px;
+  width: 150px;
+  height: 150px;
   background-color: purple;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  padding: 5px;
 `;

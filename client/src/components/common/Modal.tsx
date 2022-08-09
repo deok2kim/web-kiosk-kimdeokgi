@@ -1,26 +1,30 @@
 import styled, { css } from "styled-components";
 
-interface PropInterface {
+interface ModalProps {
   isOkBtn: boolean;
+  okBtnFunc: () => void;
   isCancelBtn: boolean;
+  cancelBtnFunc: () => void;
   body: React.ReactNode;
   header: string;
 }
 
 export default function Modal({
   isOkBtn,
+  okBtnFunc,
   isCancelBtn,
+  cancelBtnFunc,
   body,
   header,
-}: PropInterface) {
+}: ModalProps) {
   return (
     <ModalBackground>
       <ModalContainer>
         <Header>{header}</Header>
         <Body>{body}</Body>
         <Footer>
-          {isCancelBtn && <CancelBtn>취소</CancelBtn>}
-          {isOkBtn && <OkBtn>확인</OkBtn>}
+          {isCancelBtn && <CancelBtn onClick={cancelBtnFunc}>취소</CancelBtn>}
+          {isOkBtn && <OkBtn onClick={okBtnFunc}>확인</OkBtn>}
         </Footer>
       </ModalContainer>
     </ModalBackground>

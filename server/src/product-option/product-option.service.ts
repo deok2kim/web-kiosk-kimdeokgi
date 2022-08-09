@@ -22,7 +22,7 @@ export class ProductOptionService {
   findAllCategory(): Promise<ProductOptionCategory[]> {
     return this.productOptionCategoryRepository.find({
       relations: {
-        productOption: true,
+        productOptions: true,
       },
     });
   }

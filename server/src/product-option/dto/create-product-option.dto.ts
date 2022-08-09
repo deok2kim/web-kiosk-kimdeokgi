@@ -5,7 +5,7 @@ export class CreateProductOptionDto {
   readonly name: string;
 
   @IsDecimal()
-  readonly extra_charge: number;
+  readonly extraCharge: number;
 
   @IsNumber()
   readonly category: number;

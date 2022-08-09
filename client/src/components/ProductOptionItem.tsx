@@ -1,23 +1,31 @@
 import styled from "styled-components";
+import { ProductOption } from "../types";
 
-interface ProductOptionItemInterface {
-  id: number;
-  name: string;
-  extra_charge: string;
+interface ProductOptionItemProps {
+  options: ProductOption[];
+  optionCategoryName: string;
+  onProductOptionClick: (optionCategory: string, option: string) => void;
 }
 
-interface PropInterface {
-  options: ProductOptionItemInterface[];
-}
-
-export default function ProductOptionitem({ options }: PropInterface) {
+export default function ProductOptionItem({
+  options,
+  optionCategoryName,
+  onProductOptionClick,
+}: ProductOptionItemProps) {
   return (
     <OptionItemContainer>
-      {options.map(({ id, name, extra_charge }) => (
-        <OptionItemWrapper key={id}>
-          <Title>{name}</Title>
-          <ExtraCharge>+ {extra_charge}</ExtraCharge>
-        </OptionItemWrapper>
+      {options.map(({ id, name, extraCharge }, idx) => (
+        <label
+          key={id}
+          onClick={() => onProductOptionClick(optionCategoryName, name)}
+        >
+          <OptionItemWrapper>
+            <input type={"radio"} name={optionCategoryName} />
+
+            <Title>{name}</Title>
+            <ExtraCharge>+ {extraCharge}</ExtraCharge>
+          </OptionItemWrapper>
+        </label>
       ))}
     </OptionItemContainer>
   );
@@ -27,7 +35,7 @@ const Title = styled.p``;
 const ExtraCharge = styled.p``;
 const OptionItemWrapper = styled.li`
   width: 100px;
-  height: 50px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
