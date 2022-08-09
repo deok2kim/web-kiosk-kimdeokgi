@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { CategoryTitle } from "../types";
 
-const DEFAULT_CATEGORY = "라떼";
+const DEFAULT_CATEGORY = "커피";
 
 const CategoryContext = createContext({
   currentCategory: DEFAULT_CATEGORY,

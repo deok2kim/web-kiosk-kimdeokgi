@@ -4,6 +4,7 @@ import { Category, Product } from "../../types";
 import useMenuList from "../../hooks/useMenuList";
 import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
+import styled from "styled-components";
 
 export default function MenuContainer() {
   const { data, loading, error } = useMenuList();
@@ -21,9 +22,13 @@ export default function MenuContainer() {
   };
 
   return (
-    <>
+    <Container>
       <CategoryList categories={getCategories()} />
       <ProductList products={getProducts(currentCategory)} />
-    </>
+    </Container>
   );
 }
+
+const Container = styled.article`
+  height: 500px;
+`;

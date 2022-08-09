@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  Dispatch,
-  useContext,
-  useReducer,
-  useState,
-} from "react";
+import React, { createContext, Dispatch, useContext, useReducer } from "react";
 import { Cart } from "../types";
 
 type CartState = Cart[];
@@ -19,13 +13,14 @@ const CartDispatchContext = createContext<CartDispatch | undefined>(undefined);
 function cartReducer(state: CartState, action: Action): CartState {
   switch (action.type) {
     case "CREATE":
-      const nextId = Math.max(...state.map((cart) => cart.id)) + 1;
-      return state.concat({
-        id: nextId,
-        product: action.item.product,
-        option: action.item.option,
-        quantity: action.item.quantity,
-      });
+      return state
+        .map((s, idx) => ({ ...s, id: idx }))
+        .concat({
+          id: state.length + 1,
+          product: action.item.product,
+          option: action.item.option,
+          quantity: action.item.quantity,
+        });
     case "REMOVE":
       return state.filter((cart) => cart.id !== action.id);
     default:

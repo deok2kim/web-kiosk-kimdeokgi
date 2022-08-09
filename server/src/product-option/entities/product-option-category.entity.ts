@@ -18,5 +18,5 @@ export class ProductOptionCategory extends BaseEntity {
   name: string;
 
   @OneToMany(() => ProductOption, (productOption) => productOption.category)
-  productOption: ProductOption[];
+  productOptions: ProductOption[];
 }

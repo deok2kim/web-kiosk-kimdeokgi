@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ProductProvider } from "../../contexts/ProductContext";
 import { Product } from "../../types";
 import ProductItem from "./ProductItem";
 
@@ -9,13 +10,15 @@ interface ProductListProps {
 export default function ProductList({ products }: ProductListProps) {
   return (
     <>
-      <ProductListWrapper>
-        {products?.map((product) => (
-          <li key={product.id}>
-            <ProductItem product={product} />
-          </li>
-        ))}
-      </ProductListWrapper>
+      <ProductProvider>
+        <ProductListWrapper>
+          {products?.map((product) => (
+            <li key={product.id}>
+              <ProductItem product={product} />
+            </li>
+          ))}
+        </ProductListWrapper>
+      </ProductProvider>
     </>
   );
 }

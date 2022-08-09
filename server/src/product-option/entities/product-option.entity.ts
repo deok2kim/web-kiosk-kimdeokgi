@@ -10,7 +10,7 @@ export class ProductOption extends BaseEntity {
   name: string;
 
   @Column({ type: 'decimal', comment: '추가 요금', default: 0 })
-  extra_charge: number;
+  extraCharge: number;
 
   @ManyToOne(
     () => ProductOptionCategory,
