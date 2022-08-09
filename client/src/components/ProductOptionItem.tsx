@@ -1,15 +1,10 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { ProductOption } from "../types";
 
 interface ProductOptionItemProps {
   options: ProductOption[];
   optionCategoryName: string;
-  onProductOptionClick: (
-    e: React.MouseEvent,
-    optionCategory: string,
-    option: string
-  ) => void;
+  onProductOptionClick: (optionCategory: string, option: string) => void;
 }
 
 export default function ProductOptionItem({
@@ -22,14 +17,10 @@ export default function ProductOptionItem({
       {options.map(({ id, name, extraCharge }, idx) => (
         <label
           key={id}
-          onClick={(e) => onProductOptionClick(e, optionCategoryName, name)}
+          onClick={() => onProductOptionClick(optionCategoryName, name)}
         >
           <OptionItemWrapper>
-            <input
-              type={"radio"}
-              name={optionCategoryName}
-              // checked={idx === 0}
-            />
+            <input type={"radio"} name={optionCategoryName} />
 
             <Title>{name}</Title>
             <ExtraCharge>+ {extraCharge}</ExtraCharge>

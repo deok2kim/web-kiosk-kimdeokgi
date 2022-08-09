@@ -24,11 +24,7 @@ export default function ProductOptionList() {
     changeProductOption("quantity", optionForm.quantity - 1);
   };
 
-  const handleProductOptionClick = (
-    e: React.MouseEvent,
-    optionCategory: string,
-    option: string
-  ) => {
+  const handleProductOptionClick = (optionCategory: string, option: string) => {
     changeProductOption(optionCategory, option);
   };
 

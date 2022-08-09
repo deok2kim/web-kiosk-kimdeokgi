@@ -10,7 +10,7 @@ export default function CategoryItem({ category }: PropsInterface) {
   const { changeCategory } = useContext(CategoryContext);
   return (
     <>
-      <CategoryWrapper onClick={(e) => changeCategory(category.name, e)}>
+      <CategoryWrapper onClick={() => changeCategory(category.name)}>
         {category.name}
       </CategoryWrapper>
     </>

@@ -5,10 +5,7 @@ const DEFAULT_CATEGORY = "커피";
 
 const CategoryContext = createContext({
   currentCategory: DEFAULT_CATEGORY,
-  changeCategory: (
-    nextCategory: CategoryTitle,
-    e: React.MouseEvent
-  ): void => {},
+  changeCategory: (nextCategory: CategoryTitle): void => {},
 });
 
 interface CategoryProviderProps {
@@ -18,10 +15,7 @@ interface CategoryProviderProps {
 const CategoryProvider = ({ children }: CategoryProviderProps): JSX.Element => {
   const [currentCategory, setCurrentCategory] =
     useState<CategoryTitle>(DEFAULT_CATEGORY);
-  const changeCategory = (
-    nextCategory: CategoryTitle,
-    e: React.MouseEvent
-  ): void => {
+  const changeCategory = (nextCategory: CategoryTitle): void => {
     if (currentCategory === nextCategory) return;
     setCurrentCategory(nextCategory);
   };
