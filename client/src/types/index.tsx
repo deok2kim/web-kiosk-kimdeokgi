@@ -43,3 +43,8 @@ export interface ProductOption {
   name: string;
   extraCharge: string;
 }
+
+export interface PaymentOption {
+  id: number;
+  name: string;
+}
