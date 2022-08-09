@@ -23,13 +23,10 @@ export interface Cart {
   quantity: number;
 }
 
-// export type ProductTemperature = "HOT" | "ICED" | null;
-
-// export type ProductSize = "Large" | "XLarge" | null;
-
 export interface Option {
   temperature: string | null;
   size: string | null;
+  extraCharge: number;
 }
 
 export interface ProductOptionCategory {

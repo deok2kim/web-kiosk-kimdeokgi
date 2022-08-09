@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { ProductOptionCategory } from "../types";
 
 interface Response {

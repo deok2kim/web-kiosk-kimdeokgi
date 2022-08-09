@@ -4,13 +4,15 @@ interface OptionForm {
   temperature: string | null;
   size: string | null;
   quantity: number;
+  extraCharge: number;
 }
 
 interface ProductContextInterface {
   optionForm: OptionForm;
   changeProductOption: (
     optionCategory: string,
-    option: string | number
+    option: string | number,
+    extraCharge: number
   ) => void;
 }
 
@@ -19,10 +21,12 @@ const ProductContext = createContext<ProductContextInterface>({
     temperature: null,
     size: null,
     quantity: 1,
+    extraCharge: 0,
   },
   changeProductOption: (
     optionCategory: string,
-    option: string | number
+    option: string | number,
+    extraCharge: number
   ): void => {},
 });
 
@@ -35,12 +39,14 @@ const ProductProvider = ({ children }: ProductProviderProps): JSX.Element => {
     temperature: null,
     size: null,
     quantity: 1,
+    extraCharge: 0,
   });
   const changeProductOption = (
     optionCategory: string,
-    option: string | number
+    option: string | number,
+    extraCharge: number
   ): void => {
-    setOptionForm({ ...optionForm, [optionCategory]: option });
+    setOptionForm({ ...optionForm, [optionCategory]: option, extraCharge });
   };
   return (
     <ProductContext.Provider
