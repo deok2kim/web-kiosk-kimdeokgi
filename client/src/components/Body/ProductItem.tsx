@@ -15,15 +15,20 @@ export default function ProductItem({ product }: ProductProps) {
   const { optionForm, changeProductOption } = useContext(ProductContext);
   const dispatch = useCartDispatch();
 
+  const INIT_QUANTITY = 1,
+    INIT_EXTRACHARGE = 0;
+  const initProductOption = () =>
+    changeProductOption("quantity", INIT_QUANTITY, INIT_EXTRACHARGE);
+
   const onModalToggle = () => {
     setIsOpenModal(!isOpenModal);
-    changeProductOption("quantity", 1);
+    initProductOption();
   };
 
   const handleSubmit = () => {
-    const { temperature, size, quantity } = optionForm;
+    const { temperature, size, quantity, extraCharge } = optionForm;
     const selectedItem = {
-      option: { temperature, size },
+      option: { temperature, size, extraCharge },
       id: 0,
       product,
       quantity,

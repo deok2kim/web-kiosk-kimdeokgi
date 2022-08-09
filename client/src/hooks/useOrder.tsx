@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { ProductOptionCategory } from "../types";
+import { Order, OrderResponse } from "../types";
 
 interface Response {
-  data: ProductOptionCategory[];
+  data: OrderResponse[];
   loading: boolean;
   error?: Error;
 }
 
 const BASE_URL = process.env.REACT_APP_API_ROOT;
 
-const useProductOptionList = (): Response => {
-  const [data, setData] = useState<ProductOptionCategory[]>([]);
+const useOrder = (orderData: Order | null): Response => {
+  const [data, setData] = useState<OrderResponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
     setLoading(true);
-    const getProductOptionList = async () => {
+    const createOrder = async () => {
       try {
-        const response: AxiosResponse<any> = await axios.get(
-          `${BASE_URL}/product-option/category`
+        const response: AxiosResponse<any> = await axios.post(
+          `${BASE_URL}/order`,
+          orderData
         );
         setData(response.data);
       } catch (e) {
@@ -29,10 +30,10 @@ const useProductOptionList = (): Response => {
         setLoading(false);
       }
     };
-    getProductOptionList();
+    createOrder();
   }, []);
 
   return { data, loading, error };
 };
 
-export default useProductOptionList;
+export default useOrder;

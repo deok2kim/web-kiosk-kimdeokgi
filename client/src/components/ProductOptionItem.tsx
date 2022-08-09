@@ -4,7 +4,11 @@ import { ProductOption } from "../types";
 interface ProductOptionItemProps {
   options: ProductOption[];
   optionCategoryName: string;
-  onProductOptionClick: (optionCategory: string, option: string) => void;
+  onProductOptionClick: (
+    optionCategory: string,
+    option: string,
+    extraCharge: number
+  ) => void;
 }
 
 export default function ProductOptionItem({
@@ -17,7 +21,9 @@ export default function ProductOptionItem({
       {options.map(({ id, name, extraCharge }, idx) => (
         <label
           key={id}
-          onClick={() => onProductOptionClick(optionCategoryName, name)}
+          onClick={() =>
+            onProductOptionClick(optionCategoryName, name, +extraCharge)
+          }
         >
           <OptionItemWrapper>
             <input type={"radio"} name={optionCategoryName} />

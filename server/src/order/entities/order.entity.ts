@@ -2,6 +2,7 @@ import { OrderDetail } from './order-detail.entity';
 import { PaymentOption } from './payment.entity';
 import {
   BaseEntity,
+  Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
@@ -25,4 +26,13 @@ export class Order extends BaseEntity {
 
   @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.order)
   orders: OrderDetail[];
+
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    default: 0,
+    comment: '총 결제 금액',
+  })
+  totalAmount: number;
 }
