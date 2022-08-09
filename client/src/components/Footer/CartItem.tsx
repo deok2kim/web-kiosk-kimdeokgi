@@ -6,15 +6,32 @@ interface CartItemProps {
 }
 
 export default function CartItem({ cartItem }: CartItemProps) {
-  return <CartItemWrapper></CartItemWrapper>;
+  const {
+    product: { name, price, thumbnail_img },
+    option: { size, temperature },
+    quantity,
+  } = cartItem;
+  return (
+    <>
+      <CartItemWrapper>
+        <p>{name}</p>
+        <p>
+          {size} | {temperature}
+        </p>
+      </CartItemWrapper>
+    </>
+  );
 }
 
 const CartItemWrapper = styled.div`
-  width: 75px;
-  height: 75px;
+  width: 150px;
+  height: 150px;
   background-color: purple;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  padding: 5px;
 `;
