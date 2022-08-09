@@ -9,7 +9,13 @@ export class ProductOption extends BaseEntity {
   @Column({ type: 'varchar', length: 50, comment: '옵션명' })
   name: string;
 
-  @Column({ type: 'decimal', comment: '추가 요금', default: 0 })
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    default: 0,
+    comment: '추가 요금',
+  })
   extraCharge: number;
 
   @ManyToOne(

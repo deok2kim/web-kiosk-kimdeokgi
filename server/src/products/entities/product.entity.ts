@@ -15,7 +15,13 @@ export class Product extends BaseEntity {
   @Column({ type: 'varchar', length: 50, comment: '상품명' })
   name: string;
 
-  @Column({ type: 'decimal', comment: '가격' })
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    default: 0,
+    comment: '가격',
+  })
   price: number;
 
   @Column({ type: 'varchar', length: 200, comment: '이미지' })
