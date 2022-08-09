@@ -1,10 +1,26 @@
 import styled from "styled-components";
+import { useCartDispatch, useCartState } from "../../contexts/CartContext";
 
 export default function Payment() {
+  const cartList = useCartState();
+  const dispatch = useCartDispatch();
+  const onCartClear = () => {
+    dispatch({
+      type: "INIT",
+    });
+  };
+
+  const isCartEmpty = () => {
+    return !cartList.length;
+  };
   return (
     <PaymentWrapper>
-      <Button color="teal">결제</Button>
-      <Button color="tomato">취소</Button>
+      <Button color="teal" disabled={isCartEmpty()}>
+        결제
+      </Button>
+      <Button color="tomato" onClick={onCartClear} disabled={isCartEmpty()}>
+        장바구니 삭제
+      </Button>
     </PaymentWrapper>
   );
 }
