@@ -10,11 +10,13 @@ export default function PaymentOption() {
   if (!paymentOptions) return <div>직원에게 문의하세요!</div>;
 
   const onClickPayment = (paymentOption: string) => {
-    if (paymentOption !== "현금") {
-      console.log("결제 완료");
-      console.log(cartList);
-    }
-    // console.log(paymentOption);
+    totalAmount();
+  };
+
+  const totalAmount = () => {
+    return cartList.reduce((acc, { option, product, quantity }): number => {
+      return acc + (option.extraCharge + +product.price) * quantity;
+    }, 0);
   };
 
   return (
