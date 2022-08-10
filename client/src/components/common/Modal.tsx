@@ -6,7 +6,6 @@ interface ModalProps {
   isCancelBtn: boolean;
   cancelBtnFunc: () => void;
   body: React.ReactNode;
-  header: string;
 }
 
 export default function Modal({
@@ -15,12 +14,10 @@ export default function Modal({
   isCancelBtn,
   cancelBtnFunc,
   body,
-  header,
 }: ModalProps) {
   return (
     <ModalBackground>
       <ModalContainer>
-        <Header>{header}</Header>
         <Body>{body}</Body>
         <Footer>
           {isCancelBtn && <CancelBtn onClick={cancelBtnFunc}>취소</CancelBtn>}
@@ -42,33 +39,31 @@ const ModalBackground = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 999;
 `;
 
 const ModalContainer = styled.div`
-  width: 350px;
-  height: 400px;
+  width: 600px;
+  height: 800px;
   background-color: ${(props) => props.theme.bgColor};
 
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
   border-radius: 25px;
 
-  padding: 20px;
+  padding: 30px;
 `;
 
 const fullWidth = css`
   width: 100%;
 `;
 
-const Header = styled.div`
-  ${fullWidth}
-`;
 const Body = styled.div`
   ${fullWidth}
-  height: 300px;
   display: flex;
   align-items: center;
 `;
@@ -80,13 +75,21 @@ const Footer = styled.div`
 `;
 
 const CancelBtn = styled.button`
-  width: 40%;
-  height: 30px;
-  border-radius: 15px;
-  border: none;
+  width: 35%;
+  height: 70px;
+  color: white;
+  border-radius: 5px;
+  font-size: 32px;
   background-color: tomato;
+  border: none;
 `;
 
 const OkBtn = styled(CancelBtn)`
+  width: 35%;
+  height: 70px;
   background-color: teal;
+  color: white;
+  border-radius: 5px;
+  font-size: 32px;
+  border: none;
 `;

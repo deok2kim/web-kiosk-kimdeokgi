@@ -4,17 +4,11 @@ import { Order } from './entities/order.entity';
 import { PaymentOption } from './entities/payment.entity';
 
 import { CreateOrderDto } from './dto/create-order.dto';
-import { CreateOrderDetailDto } from './dto/create-order-detail.dto';
 import { CreatePaymentOptionDto } from './dto/create-payment-option.dto';
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
-  CustomRepositoryCannotInheritRepositoryError,
-  DataSource,
-  Repository,
-} from 'typeorm';
-import { options } from 'joi';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class OrderService {

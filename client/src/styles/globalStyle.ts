@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
 	body {
 		line-height: 1;
 		font-family: 'BMDOHYEON', sans-serif;
-		background-color: ${(props) => props.theme.bgColor};
+		background-color: ${(props) => props.theme.outColor};
 		color: ${(props) => props.theme.textColor}
 	}
 	a {

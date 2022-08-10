@@ -14,7 +14,6 @@ const useOrder = (orderData: Order | null): Response => {
   const [data, setData] = useState<OrderResponse>({ id: 0 });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
-
   useEffect(() => {
     setLoading(true);
     const createOrder = async () => {

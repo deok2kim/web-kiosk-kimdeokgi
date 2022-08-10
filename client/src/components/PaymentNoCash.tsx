@@ -16,7 +16,6 @@ function PaymentNoCash({ orderData }: paymentNoCashProps) {
   return (
     <ModalBackground>
       <ModalContainer>
-        <h1>PaymentNoCash</h1>
         <Receipt id={data.id} />
       </ModalContainer>
     </ModalBackground>
@@ -39,8 +38,8 @@ const ModalBackground = styled.section`
 `;
 
 const ModalContainer = styled.div`
-  width: 350px;
-  height: 400px;
+  width: 600px;
+  height: 800px;
   background-color: ${(props) => props.theme.bgColor};
 
   display: flex;
