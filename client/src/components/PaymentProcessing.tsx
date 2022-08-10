@@ -5,9 +5,11 @@ import { Order } from "../types";
 import Receipt from "./Receipt";
 
 interface paymentNoCashProps {
-  orderData: Order | null;
+  orderData: Order;
+  type: string;
+  change: number;
 }
-function PaymentNoCash({ orderData }: paymentNoCashProps) {
+function PaymentProcessing({ orderData, type, change }: paymentNoCashProps) {
   const { data, loading, error } = useOrder(orderData);
 
   if (loading) return <div>Loading...</div>;
@@ -16,13 +18,13 @@ function PaymentNoCash({ orderData }: paymentNoCashProps) {
   return (
     <ModalBackground>
       <ModalContainer>
-        <Receipt id={data.id} />
+        <Receipt id={data.id} type={type} change={change} />
       </ModalContainer>
     </ModalBackground>
   );
 }
 
-export default React.memo(PaymentNoCash);
+export default PaymentProcessing;
 
 const ModalBackground = styled.section`
   position: fixed;

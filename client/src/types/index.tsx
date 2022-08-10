@@ -75,3 +75,5 @@ export interface ReceiptResponse {
   payment: PaymentOption;
   orders: OrderProductResponse[];
 }
+
+export type CurrentPaymentOption = "기타" | "현금";

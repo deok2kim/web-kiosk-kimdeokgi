@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { SPECIAL_PAYMENT_OPTION } from "../constants";
 import useReceipt from "../hooks/useReceipt";
-import { displayPrice } from "../utils";
+import { formatPrice } from "../utils";
 
 interface ReceiptProps {
   id: number;
+  type: string;
+  change: number;
 }
 
-export default function Receipt({ id }: ReceiptProps) {
+export default function Receipt({ id, type, change }: ReceiptProps) {
   const { data, loading, error } = useReceipt(id);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;
-  console.log(data);
+
+  const hasAdditionalInfo = () => {
+    return type === SPECIAL_PAYMENT_OPTION;
+  };
 
   return (
     <ReceiptWrapper>
@@ -59,9 +64,15 @@ export default function Receipt({ id }: ReceiptProps) {
       <Dash />
       <SpaceBetweenWrapper>
         <p>결제금액</p>
-        <p>{displayPrice(data?.totalAmount ? data.totalAmount : 0)} 원</p>
+        <p>{formatPrice(data?.totalAmount ? data.totalAmount : 0)} 원</p>
       </SpaceBetweenWrapper>
       <Dash />
+      {hasAdditionalInfo() && (
+        <SpaceBetweenWrapper>
+          <p>거스름돈</p>
+          <p>{formatPrice(change)} 원</p>
+        </SpaceBetweenWrapper>
+      )}
     </ReceiptWrapper>
   );
 }
