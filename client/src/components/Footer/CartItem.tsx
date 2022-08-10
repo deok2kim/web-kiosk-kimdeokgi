@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useCartDispatch } from "../../contexts/CartContext";
 import { Cart } from "../../types";
-import { displayPrice } from "../../utils";
+import { formatPrice } from "../../utils";
 import button_add from "../../assets/images/button_add.svg";
 import button_minus from "../../assets/images/button_minus.svg";
 import button_x from "../../assets/images/button_x.svg";
@@ -41,7 +41,7 @@ export default function CartItem({ cartItem }: CartItemProps) {
           <Img src={button_add} alt="더하기" />
         </Button>
       </QuantityWrapper>
-      <Price>{displayPrice((+price + +extraCharge) * quantity)} 원</Price>
+      <Price>{formatPrice((+price + +extraCharge) * quantity)} 원</Price>
       <Button onClick={onRemoveClick}>
         <Img src={button_x} alt="제거" />
       </Button>

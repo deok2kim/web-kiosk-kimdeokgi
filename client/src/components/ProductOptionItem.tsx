@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ProductOption } from "../types";
-import { displayPrice } from "../utils";
+import { formatPrice } from "../utils";
 
 interface ProductOptionItemProps {
   options: ProductOption[];
@@ -32,7 +32,7 @@ export default function ProductOptionItem({
           >
             <OptionItemWrapper>
               <Title>{name}</Title>
-              <ExtraCharge>+ {displayPrice(extraCharge)} 원</ExtraCharge>
+              <ExtraCharge>+ {formatPrice(extraCharge)} 원</ExtraCharge>
             </OptionItemWrapper>
           </label>
         </React.Fragment>
