@@ -60,15 +60,7 @@ export interface OrderProduct {
 
 export interface OrderResponse {
   id: number;
-  // payment: number;
-  // totalAmount: string;
-  // created_at: string;
-  // products: OrderProduct[];
 }
-
-// export interface OrderProductOption {
-//   name: string | null;
-// }
 
 export interface OrderProductResponse {
   id: number;
