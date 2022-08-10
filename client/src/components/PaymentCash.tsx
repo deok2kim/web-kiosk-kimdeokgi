@@ -51,7 +51,7 @@ export default function PaymentCash({ orderData }: paymentCashProps) {
             </CashItem>
           ))}
         </CashList>
-        <p>결제 금액: {formatPrice(totalAmount || 0)} 원</p>
+        <p>결제 금액: {formatPrice(totalAmount)} 원</p>
         <p>투입 금액: {formatPrice(currentCash)} 원</p>
       </PaymentCashWrapper>
       {isEnoughPay && (
