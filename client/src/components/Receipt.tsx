@@ -102,9 +102,7 @@ const ProductListWrapper = styled.ul`
 const ProductWrapper = styled.li`
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   padding: 3px;
-  /* width: 100%; */
 `;
 
 const Title = styled.p`

@@ -25,11 +25,8 @@ export default function ProductList({ products }: ProductListProps) {
 
 const ProductListWrapper = styled.ul`
   display: flex;
-  /* align-items: center; */
   gap: 20px;
   flex-wrap: wrap;
   padding: 20px 0;
-  /* overflow-y: scroll; */
-  /* height: 700px; */
   max-height: 700px;
 `;

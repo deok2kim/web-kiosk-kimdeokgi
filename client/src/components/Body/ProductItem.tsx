@@ -64,7 +64,6 @@ export default function ProductItem({ product }: ProductProps) {
 const ProductWrapper = styled.div`
   width: 175px;
   height: 200px;
-  /* background-color: blue; */
   gap: 10px;
 
   display: flex;

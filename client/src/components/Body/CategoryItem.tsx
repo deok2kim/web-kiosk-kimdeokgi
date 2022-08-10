@@ -26,7 +26,4 @@ const CategoryWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* border-top-left-radius: 15px;
-  border-top-right-radius: 15px; */
 `;
