@@ -1,3 +1,4 @@
+import { ProductOption } from '../product-option/entities/product-option.entity';
 import { OrderDetail } from './entities/order-detail.entity';
 import { Order } from './entities/order.entity';
 import { PaymentOption } from './entities/payment.entity';
@@ -8,7 +9,12 @@ import { CreatePaymentOptionDto } from './dto/create-payment-option.dto';
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import {
+  CustomRepositoryCannotInheritRepositoryError,
+  DataSource,
+  Repository,
+} from 'typeorm';
+import { options } from 'joi';
 
 @Injectable()
 export class OrderService {
@@ -21,6 +27,9 @@ export class OrderService {
 
     @InjectRepository(OrderDetail)
     private orderDtailRepository: Repository<OrderDetail>,
+
+    @InjectRepository(ProductOption)
+    private productOptionRepository: Repository<ProductOption>,
   ) {}
 
   findAllPaymentOption(): Promise<PaymentOption[]> {
@@ -37,18 +46,33 @@ export class OrderService {
     });
   }
 
+  async findOneOrder(id: number): Promise<Order> {
+    return await this.orderRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['payment', 'orders', 'orders.productOptions'],
+    });
+  }
+
   async createOrder(orderDto: CreateOrderDto) {
     const order = await this.orderRepository.save(orderDto);
     const { id: orderId } = order;
     const { products } = orderDto;
-    products.forEach(({ id, quantity }) => {
-      const orderDetail: CreateOrderDetailDto = {
+    products.forEach(async ({ id, quantity, options }) => {
+      const optionNames = options.map((option) => ({ name: option }));
+      const productOptions = await this.productOptionRepository.find({
+        where: optionNames,
+      });
+      const orderDetail = {
         order: orderId,
         product: id,
         quantity,
+        productOptions: productOptions,
       };
-      this.orderDtailRepository.save(orderDetail);
+      await this.orderDtailRepository.save(orderDetail);
     });
-    return order;
+
+    return { id: orderId };
   }
 }

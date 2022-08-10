@@ -12,24 +12,21 @@ export default function PaymentOption() {
   const [orderData, setOrderData] = useState<Order | null>(null);
   const cartList = useCartState();
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error...</div>;
-  if (!paymentOptions) return <div>직원에게 문의하세요!</div>;
-
   const onClickPayment = (paymentOption: string, payment: number) => {
-    if (paymentOption === "현금") setIsCashPayment(true);
-    setIsOpenPaymentProcess(true);
     setOrderData({
       payment,
-      products: product(),
       totalAmount: totalAmount(),
+      products: product(),
     });
+    if (paymentOption === "현금") setIsCashPayment(true);
+    setIsOpenPaymentProcess(true);
   };
 
   const product = () => {
-    return cartList.map(({ product, quantity }) => ({
+    return cartList.map(({ product, quantity, option }) => ({
       id: product.id,
       quantity,
+      options: [option.size, option.temperature],
     }));
   };
 
@@ -40,6 +37,10 @@ export default function PaymentOption() {
       }, 0) + ""
     );
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error...</div>;
+  if (!paymentOptions) return <div>직원에게 문의하세요!</div>;
 
   return (
     <>
