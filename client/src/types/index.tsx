@@ -55,12 +55,31 @@ export interface Order {
 export interface OrderProduct {
   id: number;
   quantity: number;
+  options: (string | null)[];
 }
 
 export interface OrderResponse {
   id: number;
-  payment: number;
-  totalAmount: string;
+  // payment: number;
+  // totalAmount: string;
+  // created_at: string;
+  // products: OrderProduct[];
+}
+
+// export interface OrderProductOption {
+//   name: string | null;
+// }
+
+export interface OrderProductResponse {
+  id: number;
+  quantity: number;
+  productOptions: ProductOption[];
+  product: Product;
+}
+export interface ReceiptResponse {
+  id: number;
   created_at: string;
-  products: OrderProduct[];
+  totalAmount: string;
+  payment: PaymentOption;
+  orders: OrderProductResponse[];
 }

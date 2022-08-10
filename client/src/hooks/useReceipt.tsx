@@ -1,27 +1,26 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { Order, OrderResponse } from "../types";
+import { ReceiptResponse } from "../types";
 
 interface Response {
-  data: OrderResponse;
+  data: ReceiptResponse | null;
   loading: boolean;
   error?: Error;
 }
 
 const BASE_URL = process.env.REACT_APP_API_ROOT;
 
-const useOrder = (orderData: Order | null): Response => {
-  const [data, setData] = useState<OrderResponse>({ id: 0 });
+const useReceipt = (id: number): Response => {
+  const [data, setData] = useState<ReceiptResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
     setLoading(true);
-    const createOrder = async () => {
+    const getReceipt = async (id: number) => {
       try {
-        const response: AxiosResponse<any> = await axios.post(
-          `${BASE_URL}/order`,
-          orderData
+        const response: AxiosResponse<any> = await axios.get(
+          `${BASE_URL}/order/${id}`
         );
         setData(response.data);
       } catch (e) {
@@ -30,10 +29,12 @@ const useOrder = (orderData: Order | null): Response => {
         setLoading(false);
       }
     };
-    createOrder();
+    setTimeout(() => {
+      getReceipt(id);
+    }, 3000);
   }, []);
 
   return { data, loading, error };
 };
 
-export default useOrder;
+export default useReceipt;

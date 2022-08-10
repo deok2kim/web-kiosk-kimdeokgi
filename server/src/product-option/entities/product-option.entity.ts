@@ -1,6 +1,13 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ProductOptionCategory } from './product-option-category.entity';
 import { BaseEntity } from 'typeorm';
+import { OrderDetail } from 'src/order/entities/order-detail.entity';
 @Entity({ name: 'product_option' })
 export class ProductOption extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -27,4 +34,9 @@ export class ProductOption extends BaseEntity {
     },
   )
   category: number;
+
+  @ManyToMany(() => OrderDetail, (orderDetails) => orderDetails.id, {
+    cascade: true,
+  })
+  orderDetails: OrderDetail[];
 }

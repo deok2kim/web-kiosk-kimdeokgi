@@ -1,11 +1,15 @@
+import { ProductOption } from './../../product-option/entities/product-option.entity';
 import { Order } from './order.entity';
 import { Product } from './../../products/entities/product.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
+  JoinTable,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity({ name: 'order_detail' })
@@ -17,14 +21,20 @@ export class OrderDetail extends BaseEntity {
   quantity: number;
 
   @ManyToOne(() => Product, (product) => product.id, {
+    eager: true,
     nullable: false,
-    onDelete: 'RESTRICT',
   })
+  // @JoinColumn({ name: 'name' })
   product: number;
 
   @ManyToOne(() => Order, (order) => order.id, {
     nullable: false,
-    onDelete: 'RESTRICT',
   })
   order: number;
+
+  @ManyToMany(() => ProductOption, (productOptions) => productOptions.id, {
+    cascade: true,
+  })
+  @JoinTable()
+  productOptions: ProductOption[];
 }

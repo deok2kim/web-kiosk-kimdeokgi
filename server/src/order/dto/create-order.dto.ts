@@ -1,8 +1,9 @@
 import { IsArray, IsDecimal, IsNumber } from 'class-validator';
 
-interface product {
+interface Product {
   id: number;
   quantity: number;
+  options: string[];
 }
 
 export class CreateOrderDto {
@@ -10,7 +11,7 @@ export class CreateOrderDto {
   readonly payment: number;
 
   @IsArray()
-  readonly products: product[];
+  readonly products: Product[];
 
   @IsDecimal()
   readonly totalAmount: number;

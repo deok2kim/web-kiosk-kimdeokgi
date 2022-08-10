@@ -24,7 +24,9 @@ export class Order extends BaseEntity {
   })
   payment: number;
 
-  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.order)
+  @OneToMany(() => OrderDetail, (orderDetail) => orderDetail.order, {
+    cascade: true,
+  })
   orders: OrderDetail[];
 
   @Column({

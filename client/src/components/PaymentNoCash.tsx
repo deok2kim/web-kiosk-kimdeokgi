@@ -1,23 +1,29 @@
-import styled, { css } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import useOrder from "../hooks/useOrder";
 import { Order } from "../types";
+import Receipt from "./Receipt";
 
 interface paymentNoCashProps {
   orderData: Order | null;
 }
-export default function PaymentNoCash({ orderData }: paymentNoCashProps) {
+function PaymentNoCash({ orderData }: paymentNoCashProps) {
   const { data, loading, error } = useOrder(orderData);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;
+
   return (
     <ModalBackground>
       <ModalContainer>
         <h1>PaymentNoCash</h1>
+        <Receipt id={data.id} />
       </ModalContainer>
     </ModalBackground>
   );
 }
+
+export default React.memo(PaymentNoCash);
 
 const ModalBackground = styled.section`
   position: fixed;
