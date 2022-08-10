@@ -18,14 +18,15 @@ export default function CategoryItem({ category }: PropsInterface) {
 }
 
 const CategoryWrapper = styled.div`
-  width: 147px;
-  height: 40px;
-  background-color: green;
-
+  width: 200px;
+  height: 50px;
+  font-size: 24px;
+  background-color: inherit;
+  border: 1px solid gray;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  /* border-top-left-radius: 15px;
+  border-top-right-radius: 15px; */
 `;

@@ -12,9 +12,11 @@ export default function CartContainer() {
 }
 
 const Container = styled.section`
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* flex-wrap: nowrap; */
-  /* overflow-x: auto; */
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  margin: 20px auto;
 `;

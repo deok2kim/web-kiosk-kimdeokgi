@@ -4,6 +4,12 @@ import usePaymentOptionList from "../hooks/usePaymentOptionList";
 import PaymentNoCash from "./PaymentNoCash";
 import PaymentCash from "./PaymentCash";
 import { Order } from "../types";
+import styled from "styled-components";
+
+import 배민페이 from "../assets/images/배민페이.png";
+import 신용카드 from "../assets/images/신용카드.png";
+import 페이코인 from "../assets/images/페이코인.png";
+import 현금 from "../assets/images/현금.png";
 
 export default function PaymentOption() {
   const { data: paymentOptions, loading, error } = usePaymentOptionList();
@@ -11,6 +17,13 @@ export default function PaymentOption() {
   const [isCashPayment, setIsCashPayment] = useState(false);
   const [orderData, setOrderData] = useState<Order | null>(null);
   const cartList = useCartState();
+
+  const paymentImage = {
+    배민페이,
+    신용카드,
+    페이코인,
+    현금,
+  };
 
   const onClickPayment = (paymentOption: string, payment: number) => {
     setOrderData({
@@ -31,11 +44,9 @@ export default function PaymentOption() {
   };
 
   const totalAmount = () => {
-    return (
-      cartList.reduce((acc, { option, product, quantity }): number => {
-        return acc + (option.extraCharge + +product.price) * quantity;
-      }, 0) + ""
-    );
+    return cartList.reduce((acc, { option, product, quantity }): number => {
+      return acc + (option.extraCharge + +product.price) * quantity;
+    }, 0);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -44,19 +55,61 @@ export default function PaymentOption() {
 
   return (
     <>
-      <ul>
-        {paymentOptions.map(({ id, name }) => (
-          <li key={id}>
-            <button onClick={() => onClickPayment(name, id)}>{name}</button>
-          </li>
-        ))}
-      </ul>
-      {isOpenPaymentProcess &&
-        (isCashPayment ? (
+      {isOpenPaymentProcess ? (
+        isCashPayment ? (
           <PaymentCash />
         ) : (
           <PaymentNoCash orderData={orderData} />
-        ))}
+        )
+      ) : (
+        <PaymentList>
+          {paymentOptions.map(({ id, name }) => (
+            <PaymentItem key={id}>
+              <Button onClick={() => onClickPayment(name, id)}>
+                <Img src={paymentImage[name]} />
+                <Title>{name}</Title>
+              </Button>
+            </PaymentItem>
+          ))}
+        </PaymentList>
+      )}
     </>
   );
 }
+const PaymentList = styled.ul`
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+`;
+
+const PaymentItem = styled.li`
+  width: 220px;
+  height: 270px;
+`;
+
+const Button = styled.button`
+  background-color: inherit;
+
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+
+  &:active {
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+      rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    padding-left: 5px;
+  }
+`;
+
+const Img = styled.img`
+  width: 100px;
+  height: 100px;
+`;
+
+const Title = styled.p`
+  font-size: 20px;
+`;

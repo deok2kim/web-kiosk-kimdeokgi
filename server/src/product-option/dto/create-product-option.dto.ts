@@ -1,10 +1,10 @@
-import { IsDecimal, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateProductOptionDto {
   @IsString()
   readonly name: string;
 
-  @IsDecimal()
+  @IsNumber()
   readonly extraCharge: number;
 
   @IsNumber()

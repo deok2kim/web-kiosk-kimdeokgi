@@ -30,9 +30,7 @@ export class Order extends BaseEntity {
   orders: OrderDetail[];
 
   @Column({
-    type: 'decimal',
-    precision: 10,
-    scale: 2,
+    type: 'int',
     default: 0,
     comment: '총 결제 금액',
   })

@@ -16,11 +16,12 @@ export default function CartList() {
 }
 
 const CartListWrapper = styled.ul`
-  height: 150px;
+  height: 200px;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  overflow-x: scroll;
+  flex-direction: column;
+  overflow-y: scroll;
+  width: 580px;
+
   /* &::-webkit-scrollbar {
     display: none;
   } */

@@ -38,7 +38,7 @@ export interface ProductOptionCategory {
 export interface ProductOption {
   id: number;
   name: string;
-  extraCharge: string;
+  extraCharge: number;
 }
 
 export interface PaymentOption {
@@ -48,7 +48,7 @@ export interface PaymentOption {
 
 export interface Order {
   payment: number;
-  totalAmount: string;
+  totalAmount: number;
   products: OrderProduct[];
 }
 
@@ -71,7 +71,7 @@ export interface OrderProductResponse {
 export interface ReceiptResponse {
   id: number;
   created_at: string;
-  totalAmount: string;
+  totalAmount: number;
   payment: PaymentOption;
   orders: OrderProductResponse[];
 }

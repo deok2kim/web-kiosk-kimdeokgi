@@ -30,5 +30,5 @@ export default function MenuContainer() {
 }
 
 const Container = styled.article`
-  height: 500px;
+  height: 670px;
 `;

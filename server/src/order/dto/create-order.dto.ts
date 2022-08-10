@@ -1,4 +1,4 @@
-import { IsArray, IsDecimal, IsNumber } from 'class-validator';
+import { IsArray, IsNumber } from 'class-validator';
 
 interface Product {
   id: number;
@@ -13,6 +13,6 @@ export class CreateOrderDto {
   @IsArray()
   readonly products: Product[];
 
-  @IsDecimal()
+  @IsNumber()
   readonly totalAmount: number;
 }

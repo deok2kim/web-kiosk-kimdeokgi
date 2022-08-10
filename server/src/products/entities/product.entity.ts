@@ -16,9 +16,7 @@ export class Product extends BaseEntity {
   name: string;
 
   @Column({
-    type: 'decimal',
-    precision: 10,
-    scale: 2,
+    type: 'int',
     default: 0,
     comment: '가격',
   })

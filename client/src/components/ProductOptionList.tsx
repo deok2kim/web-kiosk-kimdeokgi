@@ -1,26 +1,30 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { PRODUCT_MAX, PRODUCT_MIN } from "../constants";
 import { ProductContext } from "../contexts/ProductContext";
 import useProductOptionList from "../hooks/useProductOptionList";
+import { Product } from "../types";
+import { displayPrice } from "../utils";
 import ProductOptionItem from "./ProductOptionItem";
 
-export default function ProductOptionList() {
+interface PaymentOptionListProps {
+  product: Product;
+}
+
+export default function ProductOptionList({ product }: PaymentOptionListProps) {
   const { data: options, loading, error } = useProductOptionList();
   const { optionForm, changeProductOption } = useContext(ProductContext);
   const { quantity, extraCharge } = optionForm;
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;
 
-  const MAX = 9,
-    MIN = 1;
-
   const onIncrease = () => {
-    if (quantity + 1 > MAX) return;
+    if (quantity + 1 > PRODUCT_MAX) return;
     changeProductOption("quantity", quantity + 1, extraCharge);
   };
 
   const onDecrease = () => {
-    if (quantity - 1 < MIN) return;
+    if (quantity - 1 < PRODUCT_MIN) return;
     changeProductOption("quantity", quantity - 1, extraCharge);
   };
 
@@ -35,23 +39,35 @@ export default function ProductOptionList() {
       optionCategory === "size" ? extraCharge : optionForm.extraCharge
     );
   };
-
   return (
     <ProductOptionContainer>
+      <hr />
+      <ProductWrapper>
+        <Img src={product.thumbnail_img} />
+        <ProductDescription>
+          <ProductTitle>{product.name}</ProductTitle>
+          <ProductPrice>{displayPrice(product.price)} 원</ProductPrice>
+        </ProductDescription>
+      </ProductWrapper>
+      <hr />
       {options.map((option) => (
-        <li key={option.id}>
-          <ProductOptionItem
-            options={option.productOptions}
-            optionCategoryName={option.name}
-            onProductOptionClick={handleProductOptionClick}
-          />
-        </li>
+        <React.Fragment key={option.id}>
+          <CategoryTitle>{option.name}(필수)</CategoryTitle>
+          <li>
+            <ProductOptionItem
+              options={option.productOptions}
+              optionCategoryName={option.name}
+              onProductOptionClick={handleProductOptionClick}
+            />
+          </li>
+        </React.Fragment>
       ))}
+      {/* <CategoryTitle>수량(필수)</CategoryTitle>
       <ProductCount>
         <button onClick={onDecrease}>-</button>
         <p>{optionForm.quantity}</p>
         <button onClick={onIncrease}>+</button>
-      </ProductCount>
+      </ProductCount> */}
     </ProductOptionContainer>
   );
 }
@@ -59,11 +75,35 @@ export default function ProductOptionList() {
 const ProductOptionContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 20px;
 `;
 
-const ProductCount = styled.li`
+const CategoryTitle = styled.p`
+  font-weight: 700;
+  font-size: 32px;
+`;
+
+const ProductWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+`;
+
+const Img = styled.img`
+  width: 120px;
+  height: 120px;
+`;
+
+const ProductDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 5px 20px;
+  gap: 20px;
+`;
+
+const ProductPrice = styled.p`
+  font-size: 16px;
+  color: teal;
+`;
+const ProductTitle = styled.p`
+  font-size: 20px;
 `;

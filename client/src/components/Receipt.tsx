@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 import useReceipt from "../hooks/useReceipt";
+import { displayPrice } from "../utils";
 
 interface ReceiptProps {
   id: number;
@@ -9,24 +12,116 @@ export default function Receipt({ id }: ReceiptProps) {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;
+  console.log(data);
 
   return (
-    <>
-      <h1>영수증</h1>
-      <p>오더넘버: {data?.created_at}</p>
-      <p>결제수단: {data?.payment.name}</p>
-      <p>총 결제금액: {data?.totalAmount}원</p>
-      <ul>
-        {data?.orders.map((order, index) => (
-          <li key={index}>
-            <p>{order.product.name}</p>
-            <p>{order.product.price}원</p>
-            <p>수량: {order.quantity}</p>
-            <p>{order.productOptions.map(({ name }) => name).join(", ")}</p>
-            <hr />
-          </li>
+    <ReceiptWrapper>
+      <StoreTitle>BAEDAL.KOMM</StoreTitle>
+      <PaymentOption>{data?.payment.name}</PaymentOption>
+      <SpaceBetweenWrapper>
+        <p>루터회관점</p>
+        <p>잠실</p>
+      </SpaceBetweenWrapper>
+      <SpaceBetweenWrapper>
+        <p>대표: 김덕기</p>
+        <p>010-8477-8981</p>
+      </SpaceBetweenWrapper>
+      <SpaceBetweenWrapper>
+        <p>POS-NO.17</p>
+        <p>{data?.created_at}</p>
+      </SpaceBetweenWrapper>
+      <Dash />
+      <ProductListWrapper>
+        {data?.orders.map(({ product, quantity, productOptions }, index) => (
+          <ProductWrapper key={index}>
+            <Title>{product.name}</Title>
+            <Options>
+              {productOptions.map(({ name }) => name).join(" . ")}
+            </Options>
+            <Price>
+              {product.price +
+                productOptions.reduce((acc, { extraCharge }): number => {
+                  return acc + extraCharge;
+                }, 0)}
+            </Price>
+            <Quantity>{quantity}</Quantity>
+            <Price>
+              {+(
+                product.price +
+                productOptions.reduce((acc, { extraCharge }): number => {
+                  return acc + extraCharge;
+                }, 0)
+              ) * +quantity}
+            </Price>
+          </ProductWrapper>
         ))}
-      </ul>
-    </>
+      </ProductListWrapper>
+      <Dash />
+      <SpaceBetweenWrapper>
+        <p>결제금액</p>
+        <p>{displayPrice(data?.totalAmount ? data.totalAmount : 0)} 원</p>
+      </SpaceBetweenWrapper>
+      <Dash />
+    </ReceiptWrapper>
   );
 }
+
+const ReceiptWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 50px;
+`;
+
+const StoreTitle = styled.p`
+  font-size: 40px;
+`;
+const PaymentOption = styled.p`
+  font-size: 30px;
+`;
+
+const SpaceBetweenWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Dash = styled.hr`
+  border: dashed 2px black;
+  width: 100%;
+`;
+
+const ProductListWrapper = styled.ul`
+  width: 100%;
+`;
+
+const ProductWrapper = styled.li`
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 3px;
+  /* width: 100%; */
+`;
+
+const Title = styled.p`
+  flex-grow: 10;
+  width: 130px;
+`;
+
+const Options = styled.span`
+  flex-grow: 4;
+  font-size: 12px;
+  width: 40px;
+`;
+
+const Price = styled.p`
+  flex-grow: 1;
+`;
+
+const Quantity = styled.p`
+  flex-grow: 2;
+`;
