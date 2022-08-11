@@ -26,4 +26,8 @@ const CategoryWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  box-shadow: ${(props) => props.theme.boxShadow.default};
+  &:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;

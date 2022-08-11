@@ -13,6 +13,7 @@ export default function Payment() {
   const onCartClear = () => dispatch({ type: "INIT" });
   const isCartEmpty = () => !cartList.length;
 
+  const isEmptyCart = () => Boolean(cartList.length);
   const onModalToggle = () => {
     setIsOpenModal(!isOpenModal);
   };
@@ -29,7 +30,6 @@ export default function Payment() {
     }, 0);
   };
 
-  const MODAL_TITLE = "결제 수단 선택";
   return (
     <PaymentWrapper>
       <AmountWrapper>
@@ -43,17 +43,18 @@ export default function Payment() {
       >
         장바구니 비우기
       </DeleteAllBtn>
-      <PaymentBtn color="teal" disabled={isCartEmpty()} onClick={onModalToggle}>
+      <PaymentBtn disabled={isCartEmpty()} onClick={onModalToggle}>
         결제
       </PaymentBtn>
       {isOpenModal && (
         <Modal
           isOkBtn={false}
           isCancelBtn
+          okBtnTitle=""
+          cancelBtnTitle="뒤로가기"
           cancelBtnFunc={onModalToggle}
           okBtnFunc={() => {}}
           body={<PaymentOption />}
-          header={MODAL_TITLE}
         />
       )}
     </PaymentWrapper>
@@ -78,6 +79,13 @@ const DeleteAllBtn = styled.button`
   border-radius: 5px;
   font-size: 16px;
   border: 1px solid gray;
+
+  box-shadow: ${(props) => props.theme.boxShadow.default};
+  :disabled {
+    background-color: #efcfcf;
+  }
+  &:enabled:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;
 
 const PaymentBtn = styled.button`
@@ -87,6 +95,12 @@ const PaymentBtn = styled.button`
   color: white;
   border-radius: 5px;
   font-size: 32px;
+  box-shadow: ${(props) => props.theme.boxShadow.default};
+  :disabled {
+    background-color: gray;
+  }
+  &:enabled:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;
 
 const Title = styled.p`

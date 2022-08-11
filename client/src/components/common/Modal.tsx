@@ -6,6 +6,8 @@ interface ModalProps {
   okBtnFunc: () => void;
   isCancelBtn: boolean;
   cancelBtnFunc: () => void;
+  okBtnTitle: string;
+  cancelBtnTitle: string;
   body: React.ReactNode;
 }
 
@@ -15,14 +17,18 @@ export default function Modal({
   isCancelBtn,
   cancelBtnFunc,
   body,
+  okBtnTitle,
+  cancelBtnTitle,
 }: ModalProps) {
   return (
     <ModalBackground>
       <ModalContainer>
         <Body>{body}</Body>
         <Footer>
-          {isCancelBtn && <CancelBtn onClick={cancelBtnFunc}>취소</CancelBtn>}
-          {isOkBtn && <OkBtn onClick={okBtnFunc}>확인</OkBtn>}
+          {isCancelBtn && (
+            <CancelBtn onClick={cancelBtnFunc}>{cancelBtnTitle}</CancelBtn>
+          )}
+          {isOkBtn && <OkBtn onClick={okBtnFunc}>{okBtnTitle}</OkBtn>}
         </Footer>
       </ModalContainer>
     </ModalBackground>
@@ -53,6 +59,9 @@ const CancelBtn = styled.button`
   font-size: 32px;
   background-color: tomato;
   border: none;
+    box-shadow: ${(props) => props.theme.boxShadow.default};
+  &:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;
 
 const OkBtn = styled(CancelBtn)`
@@ -63,4 +72,7 @@ const OkBtn = styled(CancelBtn)`
   border-radius: 5px;
   font-size: 32px;
   border: none;
+    box-shadow: ${(props) => props.theme.boxShadow.default};
+  &:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;

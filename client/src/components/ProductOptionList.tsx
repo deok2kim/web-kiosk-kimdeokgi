@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { ProductContext } from "../contexts/ProductContext";
-import useProductOptionList from "../hooks/useProductOptionList";
 import { Product, ProductOptionCategory } from "../types";
 import { formatPrice } from "../utils";
-import Loading from "./common/Loading";
 import ProductOptionItem from "./ProductOptionItem";
 
 interface PaymentOptionListProps {
@@ -42,7 +40,7 @@ export default function ProductOptionList({
       <hr />
       {options.map((option) => (
         <React.Fragment key={option.id}>
-          <CategoryTitle>{option.name}(필수)</CategoryTitle>
+          <CategoryTitle>{option.name}</CategoryTitle>
           <li>
             <ProductOptionItem
               options={option.productOptions}
@@ -61,11 +59,13 @@ const ProductOptionContainer = styled.ul`
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
+  margin-left: 30px;
 `;
 
 const CategoryTitle = styled.p`
+  margin-top: 10px;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 24px;
 `;
 
 const ProductWrapper = styled.div`

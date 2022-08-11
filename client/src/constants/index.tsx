@@ -7,21 +7,16 @@ export const INIT_QUANTITY = 1,
 export const CASH = [
   {
     id: 1,
-    name: "백원",
-    amount: 100,
-  },
-  {
-    id: 2,
-    name: "오백원",
-    amount: 500,
-  },
-  {
-    id: 3,
     name: "천원",
     amount: 1000,
   },
   {
-    id: 4,
+    id: 2,
+    name: "오천원",
+    amount: 5000,
+  },
+  {
+    id: 3,
     name: "만원",
     amount: 10000,
   },
