@@ -14,20 +14,23 @@ interface ProductContextInterface {
     option: string | number,
     extraCharge: number
   ) => void;
+  initProductOptionForm: () => void;
 }
 
+const initialData = {
+  temperature: null,
+  size: null,
+  quantity: 1,
+  extraCharge: 0,
+};
 const ProductContext = createContext<ProductContextInterface>({
-  optionForm: {
-    temperature: null,
-    size: null,
-    quantity: 1,
-    extraCharge: 0,
-  },
+  optionForm: initialData,
   changeProductOption: (
     optionCategory: string,
     option: string | number,
     extraCharge: number
   ): void => {},
+  initProductOptionForm: () => {},
 });
 
 interface ProductProviderProps {
@@ -35,12 +38,7 @@ interface ProductProviderProps {
 }
 
 const ProductProvider = ({ children }: ProductProviderProps): JSX.Element => {
-  const [optionForm, setOptionForm] = useState<OptionForm>({
-    temperature: null,
-    size: null,
-    quantity: 1,
-    extraCharge: 0,
-  });
+  const [optionForm, setOptionForm] = useState<OptionForm>(initialData);
   const changeProductOption = (
     optionCategory: string,
     option: string | number,
@@ -48,11 +46,16 @@ const ProductProvider = ({ children }: ProductProviderProps): JSX.Element => {
   ): void => {
     setOptionForm({ ...optionForm, [optionCategory]: option, extraCharge });
   };
+
+  const initProductOptionForm = () => {
+    setOptionForm(initialData);
+  };
   return (
     <ProductContext.Provider
       value={{
         optionForm,
         changeProductOption,
+        initProductOptionForm,
       }}
     >
       {children}

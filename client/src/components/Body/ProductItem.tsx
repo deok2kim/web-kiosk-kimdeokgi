@@ -14,7 +14,8 @@ interface ProductProps {
 
 export default function ProductItem({ product }: ProductProps) {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { optionForm, changeProductOption } = useContext(ProductContext);
+  const { optionForm, changeProductOption, initProductOptionForm } =
+    useContext(ProductContext);
   const dispatch = useCartDispatch();
 
   const initProductOption = () =>
@@ -33,11 +34,16 @@ export default function ProductItem({ product }: ProductProps) {
       product,
       quantity,
     };
+    if (!temperature || !size) {
+      alert("옵션을 선택해주세요");
+      return;
+    }
     dispatch({
       type: "CREATE",
       item: selectedItem,
     });
     setIsOpenModal(!isOpenModal);
+    initProductOptionForm();
   };
 
   return (

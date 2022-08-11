@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ProductOption } from "../types";
 import { formatPrice } from "../utils";
@@ -18,6 +18,15 @@ export default function ProductOptionItem({
   optionCategoryName,
   onProductOptionClick,
 }: ProductOptionItemProps) {
+  const [currentOptions, setCurrentOptions] = useState({});
+
+  const onChangeOption = (category, name, extraCharge) => {
+    setCurrentOptions({
+      ...currentOptions,
+      [category]: name,
+    });
+    onProductOptionClick(category, name, extraCharge);
+  };
   return (
     <OptionItemContainer>
       {options.map(({ id, name, extraCharge }) => (
@@ -27,7 +36,7 @@ export default function ProductOptionItem({
             htmlFor={name}
             key={id}
             onClick={() =>
-              onProductOptionClick(optionCategoryName, name, +extraCharge)
+              onChangeOption(optionCategoryName, name, +extraCharge)
             }
           >
             <OptionItemWrapper>
