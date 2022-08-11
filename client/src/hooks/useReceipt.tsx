@@ -32,8 +32,9 @@ const useReceipt = (id: number): Response => {
       }
     };
     setTimeout(() => {
+      // TODO: 디비랑 연동이 좀 이상한 부분...
       getReceipt(id);
-    }, getRandomSecond(DELAY_SECONDS.MIN, DELAY_SECONDS.MAX));
+    }, 1000);
   }, [id]);
 
   return { data, loading, error };

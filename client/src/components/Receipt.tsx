@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { SPECIAL_PAYMENT_OPTION } from "../constants";
 import useReceipt from "../hooks/useReceipt";
@@ -10,12 +11,34 @@ interface ReceiptProps {
   change: number;
 }
 
+const TIME_LIMIT = 5;
+
 export default function Receipt({ id, type, change }: ReceiptProps) {
   const { data, loading, error } = useReceipt(id);
+  const [displayCount, setDisplayCount] = useState(TIME_LIMIT - 1);
+  const countdown = useRef(TIME_LIMIT);
+
+  const autoClose = (timer) => {
+    clearInterval(timer);
+    window.location.href = "/";
+  };
+
+  useEffect(() => {
+    let timer: NodeJS.Timer | undefined;
+    if (data) {
+      timer = setInterval(() => {
+        countdown.current -= 1;
+        setDisplayCount(countdown.current - 1);
+        if (countdown.current === 1) autoClose(timer);
+      }, 1000);
+    }
+    return () => {
+      clearInterval(timer);
+    };
+  });
 
   if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
-
   const hasAdditionalInfo = () => {
     return type === SPECIAL_PAYMENT_OPTION;
   };
@@ -74,6 +97,7 @@ export default function Receipt({ id, type, change }: ReceiptProps) {
           <p>{formatPrice(change)} 원</p>
         </SpaceBetweenWrapper>
       )}
+      <p>{displayCount}초 뒤에 종료됩니다.</p>
     </ReceiptWrapper>
   );
 }

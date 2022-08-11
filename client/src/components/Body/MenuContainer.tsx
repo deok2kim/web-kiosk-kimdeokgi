@@ -5,12 +5,13 @@ import useMenuList from "../../hooks/useMenuList";
 import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
 import styled from "styled-components";
+import Loading from "../common/Loading";
 
 export default function MenuContainer() {
   const { data, loading, error } = useMenuList();
   const { currentCategory } = useContext(CategoryContext);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
 
   const getCategories = (): Category[] => {

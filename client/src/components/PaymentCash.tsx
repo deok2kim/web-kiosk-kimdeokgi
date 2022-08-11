@@ -41,25 +41,27 @@ export default function PaymentCash({ orderData }: paymentCashProps) {
   const CUR_PAYMENT_OPTION: CurrentPaymentOption = "현금";
   return (
     <>
-      <PaymentCashWrapper>
-        <CashList>
-          {cashList.map(({ id, name, amount }) => (
-            <CashItem key={id}>
-              <Button onClick={() => onClick(amount)}>
-                <Img src={cashImage[name]} />
-              </Button>
-            </CashItem>
-          ))}
-        </CashList>
-        <p>결제 금액: {formatPrice(totalAmount)} 원</p>
-        <p>투입 금액: {formatPrice(currentCash)} 원</p>
-      </PaymentCashWrapper>
-      {isEnoughPay && (
+      {isEnoughPay ? (
         <PaymentProcessing
           orderData={orderData}
           type={CUR_PAYMENT_OPTION}
           change={currentCash - totalAmount}
         />
+      ) : (
+        <PaymentCashWrapper>
+          <CashList>
+            {cashList.map(({ id, name, amount }) => (
+              <CashItem key={id}>
+                <Button onClick={() => onClick(amount)}>
+                  <Img src={cashImage[name]} />
+                  <Title>{amount}</Title>
+                </Button>
+              </CashItem>
+            ))}
+          </CashList>
+          <p>결제 금액: {formatPrice(totalAmount)} 원</p>
+          <p>투입 금액: {formatPrice(currentCash)} 원</p>
+        </PaymentCashWrapper>
       )}
     </>
   );
@@ -78,9 +80,11 @@ const CashItem = styled.li``;
 const Button = styled.button`
   background-color: inherit;
 
-  width: 100%;
-  height: 100%;
+  width: 200px;
+  height: 200px;
   border: none;
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 
   &:active {
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
@@ -91,9 +95,8 @@ const Button = styled.button`
 
 const Img = styled.img`
   /* width: 100px; */
+  display: none;
   height: 100px;
-  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
-    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 `;
 
 const Title = styled.p`
@@ -106,3 +109,5 @@ const PaymentCashWrapper = styled.section`
   justify-content: space-around;
   align-items: center;
 `;
+
+// const AmountWrapper =
