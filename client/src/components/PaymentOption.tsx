@@ -66,7 +66,7 @@ export default function PaymentOption() {
           {paymentOptions.map(({ id, name }) => (
             <PaymentItem key={id}>
               <Button onClick={() => onClickPayment(name, id)}>
-                <Img src={PAY_IMAGE[id]} />
+                <Img src={PAY_IMAGE[id - 1]} />
                 <Title>{name}</Title>
               </Button>
             </PaymentItem>
