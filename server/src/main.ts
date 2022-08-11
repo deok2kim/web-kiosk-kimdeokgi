@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
+const PORT = process.env.NODE_ENV === 'production' ? 8000 : 9000;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalPipes(
@@ -11,6 +12,6 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  await app.listen(9000);
+  await app.listen(PORT);
 }
 bootstrap();

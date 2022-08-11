@@ -4,7 +4,7 @@ import { INIT_EXTRACHARGE, INIT_QUANTITY } from "../../constants";
 import { useCartDispatch } from "../../contexts/CartContext";
 import { ProductContext } from "../../contexts/ProductContext";
 import { Product } from "../../types";
-import { displayPrice } from "../../utils";
+import { formatPrice } from "../../utils";
 import Modal from "../common/Modal";
 import ProductOptionList from "../ProductOptionList";
 
@@ -46,7 +46,7 @@ export default function ProductItem({ product }: ProductProps) {
         <Special src="" />
         <Img src={product.thumbnail_img} />
         <Title>{product.name}</Title>
-        <Price>{displayPrice(product.price)} 원</Price>
+        <Price>{formatPrice(product.price)} 원</Price>
       </ProductWrapper>
       {isOpenModal && (
         <Modal

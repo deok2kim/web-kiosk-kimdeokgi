@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useCartDispatch, useCartState } from "../../contexts/CartContext";
-import { displayPrice } from "../../utils";
+import { formatPrice } from "../../utils";
 import Modal from "../common/Modal";
 import PaymentOption from "../PaymentOption";
 
@@ -34,7 +34,7 @@ export default function Payment() {
     <PaymentWrapper>
       <AmountWrapper>
         <Title>총 {countProduct()}개 결제 금액</Title>
-        <TotalAmount>{displayPrice(totalAmount())}원</TotalAmount>
+        <TotalAmount>{formatPrice(totalAmount())}원</TotalAmount>
       </AmountWrapper>
       <DeleteAllBtn
         color="tomato"

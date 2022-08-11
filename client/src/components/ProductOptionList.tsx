@@ -4,7 +4,7 @@ import { PRODUCT_MAX, PRODUCT_MIN } from "../constants";
 import { ProductContext } from "../contexts/ProductContext";
 import useProductOptionList from "../hooks/useProductOptionList";
 import { Product } from "../types";
-import { displayPrice } from "../utils";
+import { formatPrice } from "../utils";
 import ProductOptionItem from "./ProductOptionItem";
 
 interface PaymentOptionListProps {
@@ -46,7 +46,7 @@ export default function ProductOptionList({ product }: PaymentOptionListProps) {
         <Img src={product.thumbnail_img} />
         <ProductDescription>
           <ProductTitle>{product.name}</ProductTitle>
-          <ProductPrice>{displayPrice(product.price)} 원</ProductPrice>
+          <ProductPrice>{formatPrice(product.price)} 원</ProductPrice>
         </ProductDescription>
       </ProductWrapper>
       <hr />

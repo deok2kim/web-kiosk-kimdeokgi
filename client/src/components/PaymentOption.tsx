@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useCartState } from "../contexts/CartContext";
 import usePaymentOptionList from "../hooks/usePaymentOptionList";
-import PaymentNoCash from "./PaymentNoCash";
+import PaymentProcessing from "./PaymentProcessing";
 import PaymentCash from "./PaymentCash";
-import { Order } from "../types";
+import { CurrentPaymentOption, Order } from "../types";
 import styled from "styled-components";
 
 import 배민페이 from "../assets/images/배민페이.png";
 import 신용카드 from "../assets/images/신용카드.png";
 import 페이코인 from "../assets/images/페이코인.png";
 import 현금 from "../assets/images/현금.png";
+import { SPECIAL_PAYMENT_OPTION } from "../constants";
 
 export default function PaymentOption() {
   const { data: paymentOptions, loading, error } = usePaymentOptionList();
@@ -31,7 +32,7 @@ export default function PaymentOption() {
       totalAmount: totalAmount(),
       products: product(),
     });
-    if (paymentOption === "현금") setIsCashPayment(true);
+    if (paymentOption === SPECIAL_PAYMENT_OPTION) setIsCashPayment(true);
     setIsOpenPaymentProcess(true);
   };
 
@@ -53,13 +54,18 @@ export default function PaymentOption() {
   if (error) return <div>Error...</div>;
   if (!paymentOptions) return <div>직원에게 문의하세요!</div>;
 
+  const CUR_PAYMENT_OPTION: CurrentPaymentOption = "기타";
   return (
     <>
       {isOpenPaymentProcess ? (
         isCashPayment ? (
-          <PaymentCash />
+          <PaymentCash orderData={orderData} />
         ) : (
-          <PaymentNoCash orderData={orderData} />
+          <PaymentProcessing
+            orderData={orderData}
+            type={CUR_PAYMENT_OPTION}
+            change={0}
+          />
         )
       ) : (
         <PaymentList>
