@@ -30,6 +30,6 @@ export const CASH = [
 export const SPECIAL_PAYMENT_OPTION = "현금";
 
 export const DELAY_SECONDS = {
-  MIN: 1,
+  MIN: 3,
   MAX: 7,
 };
