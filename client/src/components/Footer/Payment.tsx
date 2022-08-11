@@ -13,6 +13,7 @@ export default function Payment() {
   const onCartClear = () => dispatch({ type: "INIT" });
   const isCartEmpty = () => !cartList.length;
 
+  const isEmptyCart = () => Boolean(cartList.length);
   const onModalToggle = () => {
     setIsOpenModal(!isOpenModal);
   };
@@ -29,31 +30,31 @@ export default function Payment() {
     }, 0);
   };
 
-  const MODAL_TITLE = "결제 수단 선택";
   return (
     <PaymentWrapper>
       <AmountWrapper>
         <Title>총 {countProduct()}개 결제 금액</Title>
         <TotalAmount>{formatPrice(totalAmount())}원</TotalAmount>
       </AmountWrapper>
-      <DeleteAllBtn
-        color="tomato"
+      <DeleteBtn
+        color="${props => props.theme.error}"
         onClick={onCartClear}
         disabled={isCartEmpty()}
       >
         장바구니 비우기
-      </DeleteAllBtn>
-      <PaymentBtn color="teal" disabled={isCartEmpty()} onClick={onModalToggle}>
+      </DeleteBtn>
+      <PaymentBtn disabled={isCartEmpty()} onClick={onModalToggle}>
         결제
       </PaymentBtn>
       {isOpenModal && (
         <Modal
           isOkBtn={false}
           isCancelBtn
+          okBtnTitle=""
+          cancelBtnTitle="뒤로가기"
           cancelBtnFunc={onModalToggle}
           okBtnFunc={() => {}}
           body={<PaymentOption />}
-          header={MODAL_TITLE}
         />
       )}
     </PaymentWrapper>
@@ -70,27 +71,40 @@ const PaymentWrapper = styled.div`
   padding-left: 20px;
 `;
 
-const DeleteAllBtn = styled.button`
+const DeleteBtn = styled.button`
   width: 100%;
   height: 40px;
   background-color: inherit;
-  color: gray;
+  color: ${(props) => props.theme.label};
   border-radius: 5px;
   font-size: 16px;
-  border: 1px solid gray;
+  border: 1px solid ${(props) => props.theme.label};
+
+  box-shadow: ${(props) => props.theme.boxShadow.default};
+  :disabled {
+    background-color: #efcfcf;
+  }
+  &:enabled:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;
 
 const PaymentBtn = styled.button`
   width: 100%;
   height: 80px;
-  background-color: teal;
+  background-color: ${(props) => props.theme.primary};
   color: white;
   border-radius: 5px;
   font-size: 32px;
+  box-shadow: ${(props) => props.theme.boxShadow.default};
+  :disabled {
+    background-color: ${(props) => props.theme.label};
+  }
+  &:enabled:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;
 
 const Title = styled.p`
-  color: teal;
+  color: ${(props) => props.theme.primary};
   font-size: 12px;
 `;
 

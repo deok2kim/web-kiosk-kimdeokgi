@@ -58,7 +58,9 @@ export default function ProductItem({ product, options }: ProductProps) {
       {isOpenModal && (
         <Modal
           isOkBtn
+          okBtnTitle="담기"
           isCancelBtn
+          cancelBtnTitle="뒤로가기"
           cancelBtnFunc={onModalToggle}
           okBtnFunc={handleSubmit}
           body={<ProductOptionList product={product} options={options} />}
@@ -79,11 +81,16 @@ const ProductWrapper = styled.div`
   align-items: center;
 
   position: relative;
+
+  cursor: pointer;
 `;
 
 const Img = styled.img`
   height: 150px;
   border-radius: 10px;
+  box-shadow: ${(props) => props.theme.boxShadow.default};
+  &:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;
 
 const Title = styled.p`

@@ -24,6 +24,8 @@ function PaymentProcessing({ orderData, type, change }: paymentNoCashProps) {
     <Modal
       isOkBtn={false}
       isCancelBtn
+      okBtnTitle=""
+      cancelBtnTitle="닫기"
       okBtnFunc={() => {}}
       cancelBtnFunc={moveToMain}
       body={<Receipt id={data.id} type={type} change={change} />}

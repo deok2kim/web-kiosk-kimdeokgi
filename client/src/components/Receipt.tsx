@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { SPECIAL_PAYMENT_OPTION } from "../constants";
 import useReceipt from "../hooks/useReceipt";
-import { formatPrice } from "../utils";
+import { formatDateTime, formatPrice } from "../utils";
 import Loading from "./common/Loading";
 
 interface ReceiptProps {
@@ -57,7 +57,7 @@ export default function Receipt({ id, type, change }: ReceiptProps) {
       </SpaceBetweenWrapper>
       <SpaceBetweenWrapper>
         <p>POS-NO.17</p>
-        <p>{data?.created_at}</p>
+        <p>{formatDateTime(data?.created_at)}</p>
       </SpaceBetweenWrapper>
       <Dash />
       <ProductListWrapper>
@@ -68,19 +68,23 @@ export default function Receipt({ id, type, change }: ReceiptProps) {
               {productOptions.map(({ name }) => name).join(" . ")}
             </Options>
             <Price>
-              {product.price +
-                productOptions.reduce((acc, { extraCharge }): number => {
-                  return acc + extraCharge;
-                }, 0)}
+              {formatPrice(
+                product.price +
+                  productOptions.reduce((acc, { extraCharge }): number => {
+                    return acc + extraCharge;
+                  }, 0)
+              )}
             </Price>
             <Quantity>{quantity}</Quantity>
             <TotalPrice>
-              {+(
-                product.price +
-                productOptions.reduce((acc, { extraCharge }): number => {
-                  return acc + extraCharge;
-                }, 0)
-              ) * +quantity}
+              {formatPrice(
+                +(
+                  product.price +
+                  productOptions.reduce((acc, { extraCharge }): number => {
+                    return acc + extraCharge;
+                  }, 0)
+                ) * +quantity
+              )}
             </TotalPrice>
           </ProductWrapper>
         ))}
@@ -88,7 +92,7 @@ export default function Receipt({ id, type, change }: ReceiptProps) {
       <Dash />
       <SpaceBetweenWrapper>
         <p>결제금액</p>
-        <p>{formatPrice(data?.totalAmount ? data.totalAmount : 0)} 원</p>
+        <p>{formatPrice(data?.totalAmount)} 원</p>
       </SpaceBetweenWrapper>
       <Dash />
       {hasAdditionalInfo() && (
@@ -117,6 +121,7 @@ const StoreTitle = styled.p`
 `;
 const PaymentOption = styled.p`
   font-size: 30px;
+  margin-bottom: 50px;
 `;
 
 const SpaceBetweenWrapper = styled.div`
@@ -162,6 +167,6 @@ const TotalPrice = styled.p`
 `;
 
 const Quantity = styled.p`
-  width: 30px;
+  width: 10px;
   text-align: center;
 `;

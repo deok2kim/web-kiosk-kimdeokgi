@@ -98,16 +98,12 @@ const PaymentItem = styled.li`
 
 const Button = styled.button`
   background-color: inherit;
-
   width: 100%;
   height: 100%;
   border: none;
-  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
-    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-
+  box-shadow: ${(props) => props.theme.boxShadow.default};
   &:active {
-    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
-      rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    box-shadow: ${(props) => props.theme.boxShadow.active};
     padding-left: 5px;
   }
 `;

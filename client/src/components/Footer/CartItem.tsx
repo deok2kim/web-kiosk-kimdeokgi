@@ -40,7 +40,7 @@ export default function CartItem({ cartItem }: CartItemProps) {
   return (
     <CartItemWrapper>
       <Title>
-        <span>{name}</span>
+        <Name>{name}</Name>
         <Options>
           {size} | {temperature}
         </Options>
@@ -67,27 +67,27 @@ const CartItemWrapper = styled.div`
   align-items: center;
   padding: 5px;
 `;
+const Name = styled.p`
+  width: 250px;
+`;
 
-const Title = styled.p`
-  flex-grow: 15;
-  width: 150px;
+const Title = styled.div`
+  width: 320px;
 `;
 
 const QuantityWrapper = styled.div`
-  flex-grow: 5;
   display: flex;
   align-items: center;
   text-align: center;
 `;
 
 const Price = styled.p`
-  width: 80px;
-  color: teal;
-  text-align: center;
+  width: 100px;
+  color: ${(props) => props.theme.primary};
+  text-align: right;
 `;
 
 const Button = styled.button`
-  flex-grow: 1;
   background-color: inherit;
   border: none;
 `;
@@ -103,4 +103,5 @@ const Quantity = styled.p`
 
 const Options = styled.span`
   font-size: 12px;
+  width: 20px;
 `;

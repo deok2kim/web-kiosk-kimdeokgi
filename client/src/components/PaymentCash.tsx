@@ -1,10 +1,9 @@
 import { CASH } from "../constants";
 import { formatPrice } from "../utils/index";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import 만원 from "../assets/images/만원.jpeg";
 import 천원 from "../assets/images/천원.jpeg";
-import 오백원 from "../assets/images/오백원.png";
-import 백원 from "../assets/images/백원.png";
+import 오천원 from "../assets/images/오천원.jpeg";
 import { useState } from "react";
 import { CurrentPaymentOption, Order } from "../types";
 import PaymentProcessing from "./PaymentProcessing";
@@ -18,8 +17,7 @@ interface Cash {
 const cashImage = {
   만원,
   천원,
-  오백원,
-  백원,
+  오천원,
 };
 
 interface paymentCashProps {
@@ -54,13 +52,14 @@ export default function PaymentCash({ orderData }: paymentCashProps) {
               <CashItem key={id}>
                 <Button onClick={() => onClick(amount)}>
                   <Img src={cashImage[name]} />
-                  <Title>{amount}</Title>
                 </Button>
               </CashItem>
             ))}
           </CashList>
-          <p>결제 금액: {formatPrice(totalAmount)} 원</p>
-          <p>투입 금액: {formatPrice(currentCash)} 원</p>
+          <AmountWrapper>
+            <p>결제 금액: {formatPrice(totalAmount)} 원</p>
+            <p>투입 금액: {formatPrice(currentCash)} 원</p>
+          </AmountWrapper>
         </PaymentCashWrapper>
       )}
     </>
@@ -80,27 +79,16 @@ const CashItem = styled.li``;
 const Button = styled.button`
   background-color: inherit;
 
-  width: 200px;
-  height: 200px;
   border: none;
-  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
-    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-
+  box-shadow: ${(props) => props.theme.boxShadow.default};
   &:active {
-    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
-      rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    box-shadow: ${(props) => props.theme.boxShadow.active};
     padding-left: 5px;
   }
 `;
 
 const Img = styled.img`
-  /* width: 100px; */
-  display: none;
   height: 100px;
-`;
-
-const Title = styled.p`
-  font-size: 20px;
 `;
 
 const PaymentCashWrapper = styled.section`
@@ -110,4 +98,10 @@ const PaymentCashWrapper = styled.section`
   align-items: center;
 `;
 
-// const AmountWrapper =
+const AmountWrapper = styled.div`
+  margin-top: 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 30px;
+`;

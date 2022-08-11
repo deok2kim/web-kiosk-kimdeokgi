@@ -49,7 +49,7 @@ const OptionItemWrapper = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid gray;
+  border: 1px solid ${(props) => props.theme.label};
   border-radius: 5px;
   gap: 20px;
   padding: 15px;
@@ -68,7 +68,7 @@ const OptionItemContainer = styled.ul`
     display: none;
   }
   input[type="radio"]:checked + label {
-    background-color: teal;
+    background-color: ${(props) => props.theme.primary};
     color: white;
     li {
       border: 1px solid black;
