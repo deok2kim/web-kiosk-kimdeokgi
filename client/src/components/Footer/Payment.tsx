@@ -13,7 +13,6 @@ export default function Payment() {
   const onCartClear = () => dispatch({ type: "INIT" });
   const isCartEmpty = () => !cartList.length;
 
-  const isEmptyCart = () => Boolean(cartList.length);
   const onModalToggle = () => {
     setIsOpenModal(!isOpenModal);
   };
@@ -36,11 +35,7 @@ export default function Payment() {
         <Title>총 {countProduct()}개 결제 금액</Title>
         <TotalAmount>{formatPrice(totalAmount())}원</TotalAmount>
       </AmountWrapper>
-      <DeleteBtn
-        color="${props => props.theme.error}"
-        onClick={onCartClear}
-        disabled={isCartEmpty()}
-      >
+      <DeleteBtn onClick={onCartClear} disabled={isCartEmpty()}>
         장바구니 비우기
       </DeleteBtn>
       <PaymentBtn disabled={isCartEmpty()} onClick={onModalToggle}>

@@ -34,7 +34,7 @@ const useOrder = (orderData: Order | null): Response => {
     setTimeout(() => {
       createOrder();
     }, getRandomSecond(DELAY_SECONDS.MIN, DELAY_SECONDS.MAX));
-  }, []);
+  }, [orderData]);
 
   return { data, loading, error };
 };

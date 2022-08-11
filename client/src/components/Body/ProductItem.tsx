@@ -56,7 +56,7 @@ export default function ProductItem({ product, options }: ProductProps) {
   return (
     <>
       <ProductWrapper onClick={onModalToggle}>
-        <Special src="" />
+        {/* <Special src="" /> */}
         <Img src={product.thumbnail_img} />
         <Title>{product.name}</Title>
         <Price>{formatPrice(product.price)} 원</Price>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Adv() {
   return (
     <AdvWrapper>
-      <h1>광고</h1>
+      <h1>광고 문의</h1>
     </AdvWrapper>
   );
 }

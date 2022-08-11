@@ -6,7 +6,7 @@ import Loading from "./common/Loading";
 import Modal from "./common/Modal";
 
 interface paymentNoCashProps {
-  orderData: Order;
+  orderData: Order | null;
   type: string;
   change: number;
 }
