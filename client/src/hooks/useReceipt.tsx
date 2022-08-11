@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { ReceiptResponse } from "../types";
 import { getRandomInt } from "../utils";
+import { DELAY_SECONDS } from "../constants";
 
 interface Response {
   data: ReceiptResponse | null;
@@ -32,7 +33,7 @@ const useReceipt = (id: number): Response => {
     };
     setTimeout(() => {
       getReceipt(id);
-    }, getRandomInt(1, 7));
+    }, getRandomInt(DELAY_SECONDS.MIN, DELAY_SECONDS.MAX));
   }, [id]);
 
   return { data, loading, error };
