@@ -5,6 +5,9 @@ import { formatPrice } from "../../utils";
 import button_add from "../../assets/images/button_add.svg";
 import button_minus from "../../assets/images/button_minus.svg";
 import button_x from "../../assets/images/button_x.svg";
+import { useContext } from "react";
+import { ProductContext } from "../../contexts/ProductContext";
+import { PRODUCT_MAX, PRODUCT_MIN } from "../../constants";
 
 interface CartItemProps {
   cartItem: Cart;
@@ -24,6 +27,17 @@ export default function CartItem({ cartItem }: CartItemProps) {
       id,
     });
   };
+
+  const onIncrease = () => {
+    console.log("추가", quantity, PRODUCT_MAX);
+    if (quantity + 1 > PRODUCT_MAX) return;
+    dispatch({ type: "UPDATE_QUANTITY", id, newQuantity: quantity + 1 });
+  };
+  const onDecrease = () => {
+    if (quantity - 1 < PRODUCT_MIN) return;
+    dispatch({ type: "UPDATE_QUANTITY", id, newQuantity: quantity - 1 });
+  };
+
   return (
     <CartItemWrapper>
       <Title>
@@ -33,11 +47,11 @@ export default function CartItem({ cartItem }: CartItemProps) {
         </Options>
       </Title>
       <QuantityWrapper>
-        <Button>
+        <Button onClick={onDecrease}>
           <Img src={button_minus} alt="빼기" />
         </Button>
         <Quantity>{quantity}</Quantity>
-        <Button>
+        <Button onClick={onIncrease}>
           <Img src={button_add} alt="더하기" />
         </Button>
       </QuantityWrapper>
@@ -68,8 +82,9 @@ const QuantityWrapper = styled.div`
 `;
 
 const Price = styled.p`
-  flex-grow: 2;
+  width: 80px;
   color: teal;
+  text-align: center;
 `;
 
 const Button = styled.button`
@@ -83,7 +98,9 @@ const Img = styled.img`
   height: 30px;
 `;
 
-const Quantity = styled.p``;
+const Quantity = styled.p`
+  text-align: center;
+`;
 
 const Options = styled.span`
   font-size: 12px;

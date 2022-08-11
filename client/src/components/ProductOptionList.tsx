@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { PRODUCT_MAX, PRODUCT_MIN } from "../constants";
 import { ProductContext } from "../contexts/ProductContext";
 import useProductOptionList from "../hooks/useProductOptionList";
 import { Product } from "../types";
@@ -15,19 +14,8 @@ interface PaymentOptionListProps {
 export default function ProductOptionList({ product }: PaymentOptionListProps) {
   const { data: options, loading, error } = useProductOptionList();
   const { optionForm, changeProductOption } = useContext(ProductContext);
-  const { quantity, extraCharge } = optionForm;
   if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
-
-  const onIncrease = () => {
-    if (quantity + 1 > PRODUCT_MAX) return;
-    changeProductOption("quantity", quantity + 1, extraCharge);
-  };
-
-  const onDecrease = () => {
-    if (quantity - 1 < PRODUCT_MIN) return;
-    changeProductOption("quantity", quantity - 1, extraCharge);
-  };
 
   const handleProductOptionClick = (
     optionCategory: string,
@@ -63,12 +51,6 @@ export default function ProductOptionList({ product }: PaymentOptionListProps) {
           </li>
         </React.Fragment>
       ))}
-      {/* <CategoryTitle>수량(필수)</CategoryTitle>
-      <ProductCount>
-        <button onClick={onDecrease}>-</button>
-        <p>{optionForm.quantity}</p>
-        <button onClick={onIncrease}>+</button>
-      </ProductCount> */}
     </ProductOptionContainer>
   );
 }
