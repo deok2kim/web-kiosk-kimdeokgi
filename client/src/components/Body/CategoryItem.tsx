@@ -7,17 +7,20 @@ interface PropsInterface {
 }
 
 export default function CategoryItem({ category }: PropsInterface) {
-  const { changeCategory } = useContext(CategoryContext);
+  const { currentCategory, changeCategory } = useContext(CategoryContext);
+
+  const isSelectedCurrentCategory = () => category.name === currentCategory;
   return (
-    <>
-      <CategoryWrapper onClick={() => changeCategory(category.name)}>
-        {category.name}
-      </CategoryWrapper>
-    </>
+    <CategoryWrapper
+      onClick={() => changeCategory(category.name)}
+      disabled={isSelectedCurrentCategory()}
+    >
+      {category.name}
+    </CategoryWrapper>
   );
 }
 
-const CategoryWrapper = styled.div`
+const CategoryWrapper = styled.button`
   width: 200px;
   height: 50px;
   font-size: 24px;
@@ -28,6 +31,11 @@ const CategoryWrapper = styled.div`
   align-items: center;
   cursor: pointer;
   box-shadow: ${(props) => props.theme.boxShadow.default};
-  &:active {
+  &:enabled:active {
     box-shadow: ${(props) => props.theme.boxShadow.active};
+  }
+  &:disabled {
+    color: ${(props) => props.theme.primary};
+    font-size: 28px;
+  }
 `;
