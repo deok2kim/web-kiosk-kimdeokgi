@@ -5,13 +5,20 @@ import useMenuList from "../../hooks/useMenuList";
 import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
 import styled from "styled-components";
+import Loading from "../common/Loading";
+import useProductOptionList from "../../hooks/useProductOptionList";
 
 export default function MenuContainer() {
   const { data, loading, error } = useMenuList();
+  const {
+    data: options,
+    loading: optionsLoading,
+    error: optionsError,
+  } = useProductOptionList();
   const { currentCategory } = useContext(CategoryContext);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error...</div>;
+  if (loading || optionsLoading) return <Loading />;
+  if (error || optionsError) return <div>Error...</div>;
 
   const getCategories = (): Category[] => {
     return data.map(({ id, name }): Category => ({ id, name }));
@@ -24,7 +31,7 @@ export default function MenuContainer() {
   return (
     <Container>
       <CategoryList categories={getCategories()} />
-      <ProductList products={getProducts(currentCategory)} />
+      <ProductList products={getProducts(currentCategory)} options={options} />
     </Container>
   );
 }

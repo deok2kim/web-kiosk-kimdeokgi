@@ -29,7 +29,6 @@ export default function CartItem({ cartItem }: CartItemProps) {
   };
 
   const onIncrease = () => {
-    console.log("추가", quantity, PRODUCT_MAX);
     if (quantity + 1 > PRODUCT_MAX) return;
     dispatch({ type: "UPDATE_QUANTITY", id, newQuantity: quantity + 1 });
   };

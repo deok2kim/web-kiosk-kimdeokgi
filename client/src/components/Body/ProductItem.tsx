@@ -3,18 +3,20 @@ import styled from "styled-components";
 import { INIT_EXTRACHARGE, INIT_QUANTITY } from "../../constants";
 import { useCartDispatch } from "../../contexts/CartContext";
 import { ProductContext } from "../../contexts/ProductContext";
-import { Product } from "../../types";
+import { Product, ProductOptionCategory } from "../../types";
 import { formatPrice } from "../../utils";
 import Modal from "../common/Modal";
 import ProductOptionList from "../ProductOptionList";
 
 interface ProductProps {
   product: Product;
+  options: ProductOptionCategory[];
 }
 
-export default function ProductItem({ product }: ProductProps) {
+export default function ProductItem({ product, options }: ProductProps) {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const { optionForm, changeProductOption } = useContext(ProductContext);
+  const { optionForm, changeProductOption, initProductOptionForm } =
+    useContext(ProductContext);
   const dispatch = useCartDispatch();
 
   const initProductOption = () =>
@@ -33,11 +35,16 @@ export default function ProductItem({ product }: ProductProps) {
       product,
       quantity,
     };
+    if (!temperature || !size) {
+      alert("옵션을 선택해주세요");
+      return;
+    }
     dispatch({
       type: "CREATE",
       item: selectedItem,
     });
     setIsOpenModal(!isOpenModal);
+    initProductOptionForm();
   };
 
   return (
@@ -54,7 +61,7 @@ export default function ProductItem({ product }: ProductProps) {
           isCancelBtn
           cancelBtnFunc={onModalToggle}
           okBtnFunc={handleSubmit}
-          body={<ProductOptionList product={product} />}
+          body={<ProductOptionList product={product} options={options} />}
         />
       )}
     </>

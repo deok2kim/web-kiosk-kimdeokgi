@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { Order, OrderResponse } from "../types";
+import { getRandomSecond } from "../utils";
+import { DELAY_SECONDS } from "../constants";
 
 interface Response {
   data: OrderResponse;
@@ -29,7 +31,9 @@ const useOrder = (orderData: Order | null): Response => {
         setLoading(false);
       }
     };
-    createOrder();
+    setTimeout(() => {
+      createOrder();
+    }, getRandomSecond(DELAY_SECONDS.MIN, DELAY_SECONDS.MAX));
   }, []);
 
   return { data, loading, error };
