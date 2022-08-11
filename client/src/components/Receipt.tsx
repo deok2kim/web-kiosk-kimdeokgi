@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { SPECIAL_PAYMENT_OPTION } from "../constants";
 import useReceipt from "../hooks/useReceipt";
 import { formatPrice } from "../utils";
+import Loading from "./common/Loading";
 
 interface ReceiptProps {
   id: number;
@@ -12,7 +13,7 @@ interface ReceiptProps {
 export default function Receipt({ id, type, change }: ReceiptProps) {
   const { data, loading, error } = useReceipt(id);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
 
   const hasAdditionalInfo = () => {
