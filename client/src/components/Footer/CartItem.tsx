@@ -2,9 +2,6 @@ import styled from "styled-components";
 import { useCartDispatch } from "../../contexts/CartContext";
 import { Cart } from "../../types";
 import { formatPrice } from "../../utils";
-// import button_plus from "../../assets/images/button_add.svg";
-// import button_minus from "../../assets/images/button_minus.svg";
-// import button_x from "../../assets/images/button_x.svg";
 import { PRODUCT_MAX, PRODUCT_MIN } from "../../constants";
 
 import button_x from "../../assets/images/close.png";
