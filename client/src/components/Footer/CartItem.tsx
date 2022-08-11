@@ -82,7 +82,7 @@ const QuantityWrapper = styled.div`
 
 const Price = styled.p`
   width: 80px;
-  color: teal;
+  color: ${(props) => props.theme.primary};
   text-align: center;
 `;
 

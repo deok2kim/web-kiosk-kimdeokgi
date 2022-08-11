@@ -22,7 +22,7 @@ const CategoryWrapper = styled.div`
   height: 50px;
   font-size: 24px;
   background-color: inherit;
-  border: 1px solid gray;
+  border: 1px solid ${(props) => props.theme.label};
   display: flex;
   justify-content: center;
   align-items: center;

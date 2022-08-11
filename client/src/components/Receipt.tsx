@@ -121,6 +121,7 @@ const StoreTitle = styled.p`
 `;
 const PaymentOption = styled.p`
   font-size: 30px;
+  margin-bottom: 50px;
 `;
 
 const SpaceBetweenWrapper = styled.div`

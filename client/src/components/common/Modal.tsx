@@ -57,7 +57,7 @@ const CancelBtn = styled.button`
   color: white;
   border-radius: 5px;
   font-size: 32px;
-  background-color: tomato;
+  background-color: ${(props) => props.theme.error};
   border: none;
     box-shadow: ${(props) => props.theme.boxShadow.default};
   &:active {
@@ -67,7 +67,7 @@ const CancelBtn = styled.button`
 const OkBtn = styled(CancelBtn)`
   width: 35%;
   height: 70px;
-  background-color: teal;
+  background-color: ${(props) => props.theme.primary};
   color: white;
   border-radius: 5px;
   font-size: 32px;

@@ -86,7 +86,7 @@ const ProductDescription = styled.div`
 
 const ProductPrice = styled.p`
   font-size: 16px;
-  color: teal;
+  color: ${(props) => props.theme.primary};
 `;
 const ProductTitle = styled.p`
   font-size: 20px;

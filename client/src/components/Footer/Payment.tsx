@@ -36,13 +36,13 @@ export default function Payment() {
         <Title>총 {countProduct()}개 결제 금액</Title>
         <TotalAmount>{formatPrice(totalAmount())}원</TotalAmount>
       </AmountWrapper>
-      <DeleteAllBtn
-        color="tomato"
+      <DeleteBtn
+        color="${props => props.theme.error}"
         onClick={onCartClear}
         disabled={isCartEmpty()}
       >
         장바구니 비우기
-      </DeleteAllBtn>
+      </DeleteBtn>
       <PaymentBtn disabled={isCartEmpty()} onClick={onModalToggle}>
         결제
       </PaymentBtn>
@@ -71,14 +71,14 @@ const PaymentWrapper = styled.div`
   padding-left: 20px;
 `;
 
-const DeleteAllBtn = styled.button`
+const DeleteBtn = styled.button`
   width: 100%;
   height: 40px;
   background-color: inherit;
-  color: gray;
+  color: ${(props) => props.theme.label};
   border-radius: 5px;
   font-size: 16px;
-  border: 1px solid gray;
+  border: 1px solid ${(props) => props.theme.label};
 
   box-shadow: ${(props) => props.theme.boxShadow.default};
   :disabled {
@@ -91,20 +91,20 @@ const DeleteAllBtn = styled.button`
 const PaymentBtn = styled.button`
   width: 100%;
   height: 80px;
-  background-color: teal;
+  background-color: ${(props) => props.theme.primary};
   color: white;
   border-radius: 5px;
   font-size: 32px;
   box-shadow: ${(props) => props.theme.boxShadow.default};
   :disabled {
-    background-color: gray;
+    background-color: ${(props) => props.theme.label};
   }
   &:enabled:active {
     box-shadow: ${(props) => props.theme.boxShadow.active};
 `;
 
 const Title = styled.p`
-  color: teal;
+  color: ${(props) => props.theme.primary};
   font-size: 12px;
 `;
 

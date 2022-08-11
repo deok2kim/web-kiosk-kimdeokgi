@@ -5,6 +5,9 @@ export const theme: DefaultTheme = {
   outColor: "#ecf0f1",
   bgColor: "#fcfcfc",
   accentColor: "#9b59b6",
+  primary: "#2AC1BC",
+  error: "#F45452",
+  label: "#8D9393",
   boxShadow: {
     default:
       "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
