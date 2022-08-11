@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { ReceiptResponse } from "../types";
-import { getRandomSecond } from "../utils";
-import { DELAY_SECONDS } from "../constants";
 
 interface Response {
   data: ReceiptResponse | null;

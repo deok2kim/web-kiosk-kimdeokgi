@@ -6,12 +6,13 @@ import PaymentCash from "./PaymentCash";
 import { CurrentPaymentOption, Order } from "../types";
 import styled from "styled-components";
 
-import 배민페이 from "../assets/images/배민페이.png";
-import 신용카드 from "../assets/images/신용카드.png";
-import 페이코인 from "../assets/images/페이코인.png";
-import 현금 from "../assets/images/현금.png";
+import payBaemin from "../assets/images/배민페이.png";
+import payCard from "../assets/images/신용카드.png";
+import payCoin from "../assets/images/페이코인.png";
+import payCash from "../assets/images/현금.png";
 import { SPECIAL_PAYMENT_OPTION } from "../constants";
 import Loading from "./common/Loading";
+const PAY_IMAGE = [payCash, payCard, payBaemin, payCoin];
 
 export default function PaymentOption() {
   const { data: paymentOptions, loading, error } = usePaymentOptionList();
@@ -19,14 +20,6 @@ export default function PaymentOption() {
   const [isCashPayment, setIsCashPayment] = useState(false);
   const [orderData, setOrderData] = useState<Order | null>(null);
   const cartList = useCartState();
-
-  const paymentImage = {
-    배민페이,
-    신용카드,
-    페이코인,
-    현금,
-  };
-
   const onClickPayment = (paymentOption: string, payment: number) => {
     setOrderData({
       payment,
@@ -73,7 +66,7 @@ export default function PaymentOption() {
           {paymentOptions.map(({ id, name }) => (
             <PaymentItem key={id}>
               <Button onClick={() => onClickPayment(name, id)}>
-                <Img src={paymentImage[name]} />
+                <Img src={PAY_IMAGE[id]} />
                 <Title>{name}</Title>
               </Button>
             </PaymentItem>

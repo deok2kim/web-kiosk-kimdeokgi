@@ -18,15 +18,15 @@ export default function Receipt({ id, type, change }: ReceiptProps) {
   const [displayCount, setDisplayCount] = useState(TIME_LIMIT - 1);
   const countdown = useRef(TIME_LIMIT);
 
-  const autoClose = (timer) => {
+  const autoClose = (timer: number) => {
     clearInterval(timer);
     window.location.href = "/";
   };
 
   useEffect(() => {
-    let timer: NodeJS.Timer | undefined;
+    let timer: number;
     if (data) {
-      timer = setInterval(() => {
+      timer = window.setInterval(() => {
         countdown.current -= 1;
         setDisplayCount(countdown.current - 1);
         if (countdown.current === 1) autoClose(timer);

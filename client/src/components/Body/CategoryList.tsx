@@ -24,7 +24,7 @@ const CategoriesWrapper = styled.ul`
   align-items: center;
   overflow-x: scroll;
 
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
-  }
+  } */
 `;

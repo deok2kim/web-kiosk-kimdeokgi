@@ -5,8 +5,6 @@ import { formatPrice } from "../../utils";
 import button_add from "../../assets/images/button_add.svg";
 import button_minus from "../../assets/images/button_minus.svg";
 import button_x from "../../assets/images/button_x.svg";
-import { useContext } from "react";
-import { ProductContext } from "../../contexts/ProductContext";
 import { PRODUCT_MAX, PRODUCT_MIN } from "../../constants";
 
 interface CartItemProps {
