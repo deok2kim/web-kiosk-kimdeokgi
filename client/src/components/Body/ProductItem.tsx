@@ -3,16 +3,17 @@ import styled from "styled-components";
 import { INIT_EXTRACHARGE, INIT_QUANTITY } from "../../constants";
 import { useCartDispatch } from "../../contexts/CartContext";
 import { ProductContext } from "../../contexts/ProductContext";
-import { Product } from "../../types";
+import { Product, ProductOptionCategory } from "../../types";
 import { formatPrice } from "../../utils";
 import Modal from "../common/Modal";
 import ProductOptionList from "../ProductOptionList";
 
 interface ProductProps {
   product: Product;
+  options: ProductOptionCategory[];
 }
 
-export default function ProductItem({ product }: ProductProps) {
+export default function ProductItem({ product, options }: ProductProps) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { optionForm, changeProductOption, initProductOptionForm } =
     useContext(ProductContext);
@@ -60,7 +61,7 @@ export default function ProductItem({ product }: ProductProps) {
           isCancelBtn
           cancelBtnFunc={onModalToggle}
           okBtnFunc={handleSubmit}
-          body={<ProductOptionList product={product} />}
+          body={<ProductOptionList product={product} options={options} />}
         />
       )}
     </>

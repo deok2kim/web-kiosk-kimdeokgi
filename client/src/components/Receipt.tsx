@@ -11,7 +11,7 @@ interface ReceiptProps {
   change: number;
 }
 
-const TIME_LIMIT = 5;
+const TIME_LIMIT = 100;
 
 export default function Receipt({ id, type, change }: ReceiptProps) {
   const { data, loading, error } = useReceipt(id);
@@ -74,14 +74,14 @@ export default function Receipt({ id, type, change }: ReceiptProps) {
                 }, 0)}
             </Price>
             <Quantity>{quantity}</Quantity>
-            <Price>
+            <TotalPrice>
               {+(
                 product.price +
                 productOptions.reduce((acc, { extraCharge }): number => {
                   return acc + extraCharge;
                 }, 0)
               ) * +quantity}
-            </Price>
+            </TotalPrice>
           </ProductWrapper>
         ))}
       </ProductListWrapper>
@@ -153,9 +153,15 @@ const Options = styled.span`
 `;
 
 const Price = styled.p`
-  flex-grow: 1;
+  width: 69px;
+`;
+
+const TotalPrice = styled.p`
+  width: 70px;
+  text-align: end;
 `;
 
 const Quantity = styled.p`
-  flex-grow: 2;
+  width: 30px;
+  text-align: center;
 `;

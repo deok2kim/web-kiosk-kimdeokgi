@@ -2,20 +2,21 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { ProductContext } from "../contexts/ProductContext";
 import useProductOptionList from "../hooks/useProductOptionList";
-import { Product } from "../types";
+import { Product, ProductOptionCategory } from "../types";
 import { formatPrice } from "../utils";
 import Loading from "./common/Loading";
 import ProductOptionItem from "./ProductOptionItem";
 
 interface PaymentOptionListProps {
   product: Product;
+  options: ProductOptionCategory[];
 }
 
-export default function ProductOptionList({ product }: PaymentOptionListProps) {
-  const { data: options, loading, error } = useProductOptionList();
+export default function ProductOptionList({
+  product,
+  options,
+}: PaymentOptionListProps) {
   const { optionForm, changeProductOption } = useContext(ProductContext);
-  if (loading) return <Loading />;
-  if (error) return <div>Error...</div>;
 
   const handleProductOptionClick = (
     optionCategory: string,
