@@ -34,7 +34,7 @@ const KProduct = keyframes`
 `;
 const ProductListWrapper = styled.ul`
   display: flex;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
   padding: 20px 0;
   max-height: 700px;
