@@ -11,6 +11,7 @@ import 신용카드 from "../assets/images/신용카드.png";
 import 페이코인 from "../assets/images/페이코인.png";
 import 현금 from "../assets/images/현금.png";
 import { SPECIAL_PAYMENT_OPTION } from "../constants";
+import Loading from "./common/Loading";
 
 export default function PaymentOption() {
   const { data: paymentOptions, loading, error } = usePaymentOptionList();
@@ -50,7 +51,7 @@ export default function PaymentOption() {
     }, 0);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
   if (!paymentOptions) return <div>직원에게 문의하세요!</div>;
 

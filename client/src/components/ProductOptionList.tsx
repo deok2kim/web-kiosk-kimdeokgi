@@ -5,6 +5,7 @@ import { ProductContext } from "../contexts/ProductContext";
 import useProductOptionList from "../hooks/useProductOptionList";
 import { Product } from "../types";
 import { formatPrice } from "../utils";
+import Loading from "./common/Loading";
 import ProductOptionItem from "./ProductOptionItem";
 
 interface PaymentOptionListProps {
@@ -15,7 +16,7 @@ export default function ProductOptionList({ product }: PaymentOptionListProps) {
   const { data: options, loading, error } = useProductOptionList();
   const { optionForm, changeProductOption } = useContext(ProductContext);
   const { quantity, extraCharge } = optionForm;
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
 
   const onIncrease = () => {
