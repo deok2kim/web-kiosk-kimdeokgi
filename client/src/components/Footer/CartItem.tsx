@@ -2,10 +2,14 @@ import styled from "styled-components";
 import { useCartDispatch } from "../../contexts/CartContext";
 import { Cart } from "../../types";
 import { formatPrice } from "../../utils";
-import button_add from "../../assets/images/button_add.svg";
-import button_minus from "../../assets/images/button_minus.svg";
-import button_x from "../../assets/images/button_x.svg";
+// import button_plus from "../../assets/images/button_add.svg";
+// import button_minus from "../../assets/images/button_minus.svg";
+// import button_x from "../../assets/images/button_x.svg";
 import { PRODUCT_MAX, PRODUCT_MIN } from "../../constants";
+
+import button_x from "../../assets/images/close.png";
+import button_minus from "../../assets/images/minus.png";
+import button_plus from "../../assets/images/plus.png";
 
 interface CartItemProps {
   cartItem: Cart;
@@ -40,7 +44,7 @@ export default function CartItem({ cartItem }: CartItemProps) {
       <Title>
         <Name>{name}</Name>
         <Options>
-          {size} | {temperature}
+          {temperature}, {size}
         </Options>
       </Title>
       <QuantityWrapper>
@@ -49,7 +53,7 @@ export default function CartItem({ cartItem }: CartItemProps) {
         </Button>
         <Quantity>{quantity}</Quantity>
         <Button onClick={onIncrease}>
-          <Img src={button_add} alt="더하기" />
+          <Img src={button_plus} alt="더하기" />
         </Button>
       </QuantityWrapper>
       <Price>{formatPrice((+price + +extraCharge) * quantity)} 원</Price>
@@ -83,6 +87,7 @@ const Price = styled.p`
   width: 100px;
   color: ${(props) => props.theme.primary};
   text-align: right;
+  margin-right: 5px;
 `;
 
 const Button = styled.button`
@@ -91,12 +96,13 @@ const Button = styled.button`
 `;
 
 const Img = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 `;
 
 const Quantity = styled.p`
   text-align: center;
+  width: 20px;
 `;
 
 const Options = styled.span`
