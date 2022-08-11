@@ -24,6 +24,7 @@ import { OrderModule } from './order/order.module';
       entities: ['dist/**/*.entity.{ts,js}'],
       synchronize: true,
       logging: true,
+      timezone: 'Asia/Seoul',
     }),
     ProductsModule,
     ProductOptionModule,
