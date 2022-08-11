@@ -5,6 +5,7 @@ import { useCartDispatch } from "../../contexts/CartContext";
 import { ProductContext } from "../../contexts/ProductContext";
 import { Product, ProductOptionCategory } from "../../types";
 import { formatPrice } from "../../utils";
+import Alert from "../common/Alert";
 import Modal from "../common/Modal";
 import ProductOptionList from "../ProductOptionList";
 
@@ -15,6 +16,7 @@ interface ProductProps {
 
 export default function ProductItem({ product, options }: ProductProps) {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenALert, setIsAlertOpen] = useState(false);
   const { optionForm, changeProductOption, initProductOptionForm } =
     useContext(ProductContext);
   const dispatch = useCartDispatch();
@@ -27,6 +29,10 @@ export default function ProductItem({ product, options }: ProductProps) {
     initProductOption();
   };
 
+  const onAlertToggle = () => {
+    setIsAlertOpen(!isOpenALert);
+  };
+
   const handleSubmit = () => {
     const { temperature, size, quantity, extraCharge } = optionForm;
     const selectedItem = {
@@ -36,7 +42,7 @@ export default function ProductItem({ product, options }: ProductProps) {
       quantity,
     };
     if (!temperature || !size) {
-      alert("옵션을 선택해주세요");
+      onAlertToggle();
       return;
     }
     dispatch({
@@ -63,6 +69,9 @@ export default function ProductItem({ product, options }: ProductProps) {
           okBtnFunc={handleSubmit}
           body={<ProductOptionList product={product} options={options} />}
         />
+      )}
+      {isOpenALert && (
+        <Alert text={"옵션을 선택해주세요 🙏"} close={onAlertToggle} />
       )}
     </>
   );

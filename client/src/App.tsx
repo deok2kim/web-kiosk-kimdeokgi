@@ -27,7 +27,7 @@ const Container = styled.article`
   width: 820px;
   height: 1180px;
 
-  margin: 50px auto;
+  margin: 0 auto;
   padding: 30px;
   background-color: ${(props) => props.theme.bgColor};
   border-radius: 50px;

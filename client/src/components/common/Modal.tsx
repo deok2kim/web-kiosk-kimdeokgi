@@ -53,6 +53,9 @@ const CancelBtn = styled.button`
   font-size: 32px;
   background-color: tomato;
   border: none;
+    box-shadow: ${(props) => props.theme.boxShadow.default};
+  &:active {
+    box-shadow: ${(props) => props.theme.boxShadow.active};
 `;
 
 const OkBtn = styled(CancelBtn)`
