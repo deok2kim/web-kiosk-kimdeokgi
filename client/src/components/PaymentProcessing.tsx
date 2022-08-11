@@ -4,6 +4,7 @@ import { Order } from "../types";
 import Receipt from "./Receipt";
 import Loading from "./common/Loading";
 import Modal from "./common/Modal";
+import Error from "./common/Error";
 
 interface paymentNoCashProps {
   orderData: Order | null;
@@ -14,7 +15,7 @@ function PaymentProcessing({ orderData, type, change }: paymentNoCashProps) {
   const { data, loading, error } = useOrder(orderData);
 
   if (loading) return <Loading />;
-  if (error) return <div>Error...</div>;
+  if (error) return <Error />;
 
   const moveToMain = () => {
     window.location.href = "/";

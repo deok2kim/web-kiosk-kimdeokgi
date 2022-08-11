@@ -7,6 +7,7 @@ import ProductList from "./ProductList";
 import styled from "styled-components";
 import Loading from "../common/Loading";
 import useProductOptionList from "../../hooks/useProductOptionList";
+import Error from "../common/Error";
 
 export default function MenuContainer() {
   const { data, loading, error } = useMenuList();
@@ -18,7 +19,7 @@ export default function MenuContainer() {
   const { currentCategory } = useContext(CategoryContext);
 
   if (loading || optionsLoading) return <Loading />;
-  if (error || optionsError) return <div>Error...</div>;
+  if (error || optionsError) return <Error />;
 
   const getCategories = (): Category[] => {
     return data.map(({ id, name }): Category => ({ id, name }));

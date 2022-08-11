@@ -12,6 +12,7 @@ import payCoin from "../assets/images/페이코인.png";
 import payCash from "../assets/images/현금.png";
 import { SPECIAL_PAYMENT_OPTION } from "../constants";
 import Loading from "./common/Loading";
+import Error from "./common/Error";
 const PAY_IMAGE = [payCash, payCard, payBaemin, payCoin];
 
 export default function PaymentOption() {
@@ -45,7 +46,7 @@ export default function PaymentOption() {
   };
 
   if (loading) return <Loading />;
-  if (error) return <div>Error...</div>;
+  if (error) return <Error />;
   if (!paymentOptions) return <div>직원에게 문의하세요!</div>;
 
   const CUR_PAYMENT_OPTION: CurrentPaymentOption = "기타";
