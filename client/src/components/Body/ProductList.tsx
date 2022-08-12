@@ -25,19 +25,18 @@ export default function ProductList({ products, options }: ProductListProps) {
 const KProduct = keyframes`
   0% {
     opacity: 0;
-  }
-  30% {
-    opacity: 0.8;
+    transform: translateX(-40px);
   }
   100% {
     opacity: 1;
+    transform: translateX(0px);
   }
 `;
 const ProductListWrapper = styled.ul`
   display: flex;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
   padding: 20px 0;
   max-height: 700px;
-  animation: ${KProduct} 3s linear;
+  animation: ${KProduct} 0.3s linear;
 `;

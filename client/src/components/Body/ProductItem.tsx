@@ -80,9 +80,9 @@ export default function ProductItem({ product, options }: ProductProps) {
 }
 
 const ProductWrapper = styled.div`
-  width: 175px;
-  height: 200px;
-  gap: 10px;
+  width: 178px;
+  height: 220px;
+  gap: 15px;
 
   display: flex;
   flex-direction: column;
@@ -100,10 +100,13 @@ const Img = styled.img`
   box-shadow: ${(props) => props.theme.boxShadow.default};
   &:active {
     box-shadow: ${(props) => props.theme.boxShadow.active};
+  }
 `;
 
 const Title = styled.p`
-  font-size: 12px;
+  font-size: 18px;
+  width: 110%;
+  text-align: center;
 `;
 
 const Price = styled.p`
