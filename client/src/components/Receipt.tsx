@@ -12,7 +12,7 @@ interface ReceiptProps {
   change: number;
 }
 
-const TIME_LIMIT = 100;
+const TIME_LIMIT = 7;
 
 export default function Receipt({ id, type, change }: ReceiptProps) {
   const { data, loading, error } = useReceipt(id);
@@ -38,83 +38,96 @@ export default function Receipt({ id, type, change }: ReceiptProps) {
     };
   });
 
-  if (loading) return <Loading />;
+  if (loading || !data) return <Loading />;
   if (error) return <Error />;
   const hasAdditionalInfo = () => {
     return type === SPECIAL_PAYMENT_OPTION;
   };
 
   return (
-    <ReceiptWrapper>
-      <StoreTitle>BAEDAL.KOMM</StoreTitle>
-      <PaymentOption>{data?.payment.name}</PaymentOption>
-      <SpaceBetweenWrapper>
-        <p>루터회관점</p>
-        <p>잠실</p>
-      </SpaceBetweenWrapper>
-      <SpaceBetweenWrapper>
-        <p>대표: 김덕기</p>
-        <p>010-8477-8981</p>
-      </SpaceBetweenWrapper>
-      <SpaceBetweenWrapper>
-        <p>POS-NO.17</p>
-        <p>{formatDateTime(data?.created_at)}</p>
-      </SpaceBetweenWrapper>
-      <Dash />
-      <ProductListWrapper>
-        {data?.orders.map(({ product, quantity, productOptions }, index) => (
-          <ProductWrapper key={index}>
-            <Title>{product.name}</Title>
-            <Options>
-              {productOptions.map(({ name }) => name).join(" . ")}
-            </Options>
-            <Price>
-              {formatPrice(
-                product.price +
-                  productOptions.reduce((acc, { extraCharge }): number => {
-                    return acc + extraCharge;
-                  }, 0)
-              )}
-            </Price>
-            <Quantity>{quantity}</Quantity>
-            <TotalPrice>
-              {formatPrice(
-                +(
-                  product.price +
-                  productOptions.reduce((acc, { extraCharge }): number => {
-                    return acc + extraCharge;
-                  }, 0)
-                ) * +quantity
-              )}
-            </TotalPrice>
-          </ProductWrapper>
-        ))}
-      </ProductListWrapper>
-      <Dash />
-      <SpaceBetweenWrapper>
-        <p>결제금액</p>
-        <p>{formatPrice(data?.totalAmount)} 원</p>
-      </SpaceBetweenWrapper>
-      <Dash />
-      {hasAdditionalInfo() && (
+    <Container>
+      <ReceiptWrapper>
+        <StoreTitle>BAEDAL.KOMM</StoreTitle>
+        <PaymentOption>{data?.payment.name}</PaymentOption>
         <SpaceBetweenWrapper>
-          <p>거스름돈</p>
-          <p>{formatPrice(change)} 원</p>
+          <p>루터회관점</p>
+          <p>잠실</p>
         </SpaceBetweenWrapper>
-      )}
+        <SpaceBetweenWrapper>
+          <p>대표: 김덕기</p>
+          <p>010-8477-8981</p>
+        </SpaceBetweenWrapper>
+        <SpaceBetweenWrapper>
+          <p>POS-NO.17</p>
+          <p>{formatDateTime(data?.created_at)}</p>
+        </SpaceBetweenWrapper>
+        <Dash />
+        <ProductListWrapper>
+          {data?.orders.map(({ product, quantity, productOptions }, index) => (
+            <ProductWrapper key={index}>
+              <Title>{product.name}</Title>
+              <Options>
+                {productOptions.map(({ name }) => name).join(" . ")}
+              </Options>
+              <Price>
+                {formatPrice(
+                  product.price +
+                    productOptions.reduce((acc, { extraCharge }): number => {
+                      return acc + extraCharge;
+                    }, 0)
+                )}
+              </Price>
+              <Quantity>{quantity}</Quantity>
+              <TotalPrice>
+                {formatPrice(
+                  +(
+                    product.price +
+                    productOptions.reduce((acc, { extraCharge }): number => {
+                      return acc + extraCharge;
+                    }, 0)
+                  ) * +quantity
+                )}
+              </TotalPrice>
+            </ProductWrapper>
+          ))}
+        </ProductListWrapper>
+        <Dash />
+        <SpaceBetweenWrapper>
+          <p>결제금액</p>
+          <p>{formatPrice(data?.totalAmount)} 원</p>
+        </SpaceBetweenWrapper>
+        <Dash />
+        {hasAdditionalInfo() && (
+          <SpaceBetweenWrapper>
+            <p>거스름돈</p>
+            <p>{formatPrice(change)} 원</p>
+          </SpaceBetweenWrapper>
+        )}
+      </ReceiptWrapper>
       <p>{displayCount}초 뒤에 종료됩니다.</p>
-    </ReceiptWrapper>
+    </Container>
   );
 }
+
+const Container = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+`;
 
 const ReceiptWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   gap: 12px;
   width: 100%;
+  height: 600px;
   padding: 50px;
+  overflow: auto;
 `;
 
 const StoreTitle = styled.p`
