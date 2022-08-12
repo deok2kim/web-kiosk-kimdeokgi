@@ -21,7 +21,7 @@ export default function CategoryItem({ category }: PropsInterface) {
 }
 
 const CategoryWrapper = styled.button`
-  width: 200px;
+  width: 150px;
   height: 50px;
   font-size: 24px;
   background-color: inherit;

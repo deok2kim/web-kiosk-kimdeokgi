@@ -80,7 +80,7 @@ export default function ProductItem({ product, options }: ProductProps) {
 }
 
 const ProductWrapper = styled.div`
-  width: 175px;
+  width: 178px;
   height: 220px;
   gap: 15px;
 
